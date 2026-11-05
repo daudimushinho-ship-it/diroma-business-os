@@ -21,7 +21,7 @@ export const LANDING: Record<AppRole, string> = {
 
 export type NavKey =
   | "overview" | "operations" | "sell" | "products" | "store" | "shopStock" | "wholesale"
-  | "money" | "customers" | "reports" | "team" | "control" | "settings" | "help";
+  | "purchasing" | "money" | "customers" | "reports" | "team" | "control" | "settings" | "help";
 
 export type NavItem = { key: NavKey; href: string; permission: string | null; icon: string };
 
@@ -33,6 +33,7 @@ export const NAV: NavItem[] = [
   { key: "store",      href: "/store",      permission: "store.operate",       icon: "box" },
   { key: "shopStock",  href: "/shop-stock", permission: "shop_stock.view",     icon: "shop" },
   { key: "wholesale",  href: "/wholesale",  permission: "wholesale.manage",    icon: "truck" },
+  { key: "purchasing", href: "/purchasing", permission: "purchasing.manage",   icon: "receipt" },
   { key: "money",      href: "/money",      permission: "money.view",          icon: "wallet" },
   { key: "customers",  href: "/customers",  permission: "customers.view",      icon: "users" },
   { key: "reports",    href: "/reports",    permission: "reports.view",        icon: "chart" },

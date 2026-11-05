@@ -1,0 +1,98 @@
+import type { Lang } from "./i18n";
+
+const sw = {
+  products: "Bidhaa", newDesign: "Design mpya", importCsv: "Import CSV", search: "Tafuta", code: "Code", name: "Jina",
+  category: "Aina", supplier: "Supplier", colors: "Rangi", colorsHint: "Tenganisha kwa koma: Black, Navy, Grey",
+  sizes: "Saizi", retail: "Bei ya rejareja (TZS)", wholesale: "Bei ya jumla (TZS)", variants: "Variants",
+  from: "Kuanzia", unpriced: "bila bei", create: "Unda", save: "Hifadhi", reason: "Sababu", sku: "SKU", barcode: "Barcode",
+  printLabels: "Chapisha lebo", labelsNote: "Lebo hazina bei. Tumia karatasi ya lebo au A4; jaribu scanner yako kabla ya kuchapisha nyingi.",
+  addVariant: "Ongeza variant", color: "Rangi", size: "Saizi", none: "—", back: "Rudi", stock: "Stoki",
+  choose: "Chagua", optional: "hiari", qty: "Idadi", notes: "Maelezo", submit: "Tuma", noData: "Hakuna data bado.",
+  saved: "Imehifadhiwa.", location: "Eneo",
+  store: {
+    title: "Stoo", overview: "Muhtasari", receive: "Pokea mzigo", stock: "Stoki kwa saizi", requisitions: "Maombi ya duka",
+    transit: "Mzigo njiani", discrepancies: "Mapungufu", counts: "Kuhesabu stoo", movements: "Historia", reports: "Ripoti",
+    opening: "Stoki ya mwanzo",
+    onHand: "Iliyopo", reserved: "Imehifadhiwa", available: "Inapatikana", inTransitOut: "Njiani (imetoka hapa)",
+    incoming: "Inayoingia (haijathibitishwa)", pendingReq: "Maombi yanayosubiri", openDisc: "Mapungufu wazi",
+    openCounts: "Hesabu zinazoendelea", pendingCosts: "Risiti zinazosubiri gharama", company: "Stoki yote ya kampuni",
+    warehouse: "Stoo", shop: "Duka", transitAll: "Njiani", inspection: "Ukaguzi / zilizoharibika",
+    fromPo: "Kutoka Purchase Order", noPo: "Bila PO (chagua design)", supplierRef: "Namba ya invoice ya supplier",
+    expected: "Inatarajiwa", received: "Imepokelewa", postReceipt: "Rekodi mzigo uliopokelewa",
+    approve: "Idhinisha", reject: "Kataa", dispatch: "Tuma mzigo", confirmReceipt: "Thibitisha kupokea",
+    requested: "Ameomba", approved: "Imeidhinishwa", dispatched: "Imetumwa", status: "Hali", to: "Kwenda", fromLoc: "Kutoka",
+    resolve: "Tatua", foundDelivered: "Imepatikana, imefika", returned: "Imerudi stoo", writtenOff: "Imepotea (futa)",
+    startCount: "Anza kuhesabu (bidhaa zote zilizopo)", countSheet: "Karatasi ya kuhesabu", counted: "Uliyohesabu",
+    submitCount: "Wasilisha hesabu", system: "Mfumo", variance: "Tofauti", approveCount: "Idhinisha hesabu",
+    blindNote: "Hesabu bila kuona idadi ya mfumo. Tofauti zitaonekana kwa anayeidhinisha tu.",
+    when: "Lini", doc: "Hati", change: "Mabadiliko", newRequest: "Omba mzigo kutoka Stoo", requestStock: "Tuma ombi",
+    overrideReason: "Sababu ya kuthibitisha mwenyewe (Owner tu)", exportCsv: "Pakua CSV", period: "Kipindi",
+    openingQty: "Mwanzo", inbound: "Ingia", outbound: "Toka", closing: "Mwisho", openingNote: "Rekodi ya stoki ya mwanzo ni hati rasmi. Haibadilishi stoki kimya kimya.",
+  },
+  purchasing: {
+    title: "Manunuzi", suppliers: "Suppliers", newSupplier: "Supplier mpya", phone: "Simu", country: "Nchi",
+    pos: "Purchase Orders", newPo: "PO mpya", currency: "Sarafu", fx: "Kiwango (TZS kwa 1)", expectedAt: "Inatarajiwa kufika",
+    unitPrice: "Bei kwa kipande (sarafu ya PO)", createPo: "Unda PO", receipts: "Risiti zinazosubiri gharama",
+    approveCosts: "Idhinisha gharama", unitCost: "Gharama kwa kipande (TZS)", extras: "Gharama za ziada (usafiri, ushuru, clearing)",
+    label: "Maelezo", amount: "Kiasi (TZS)", allocation: "Gawa kwa", byValue: "Thamani", byQty: "Idadi",
+    costNote: "Gharama ni siri: zinaonekana kwa Owner tu. Mgawanyo unazungushwa ili jumla ilingane kabisa.",
+  },
+  importPage: {
+    intro: "Safu (columns): design_code, design_name, category, color, size, retail_price, wholesale_price, barcode, supplier",
+    paste: "Bandika CSV au pakia faili", preview: "Kagua kwanza", commit: "Import sasa", mode: "Ikiwa variant ipo tayari",
+    createOnly: "Iwe kosa (usibadilishe)", updatePrices: "Badilisha bei", rows: "Mistari", errors: "Makosa", ok: "Sawa",
+    result: "Matokeo", template: "Pakua template", categories: "Aina zinazokubalika",
+  },
+  shop: { title: "Stoki ya Dukani", incoming: "Mzigo unaoingia", myRequests: "Maombi yangu" },
+};
+
+type StockDict = typeof sw;
+
+const en: StockDict = {
+  products: "Products", newDesign: "New design", importCsv: "Import CSV", search: "Search", code: "Code", name: "Name",
+  category: "Category", supplier: "Supplier", colors: "Colours", colorsHint: "Comma separated: Black, Navy, Grey",
+  sizes: "Sizes", retail: "Retail price (TZS)", wholesale: "Wholesale price (TZS)", variants: "Variants",
+  from: "From", unpriced: "unpriced", create: "Create", save: "Save", reason: "Reason", sku: "SKU", barcode: "Barcode",
+  printLabels: "Print labels", labelsNote: "Labels carry no price. Use label sheets or A4; test your scanner before printing in bulk.",
+  addVariant: "Add variant", color: "Colour", size: "Size", none: "—", back: "Back", stock: "Stock",
+  choose: "Choose", optional: "optional", qty: "Qty", notes: "Notes", submit: "Submit", noData: "No data yet.",
+  saved: "Saved.", location: "Location",
+  store: {
+    title: "Store / Stoo", overview: "Overview", receive: "Receive goods", stock: "Stock by size", requisitions: "Shop requisitions",
+    transit: "In transit", discrepancies: "Discrepancies", counts: "Counts", movements: "Movement history", reports: "Reports",
+    opening: "Opening stock",
+    onHand: "On hand", reserved: "Reserved", available: "Available", inTransitOut: "In transit (sent from here)",
+    incoming: "Incoming (unconfirmed)", pendingReq: "Pending requisitions", openDisc: "Open discrepancies",
+    openCounts: "Counts in progress", pendingCosts: "Receipts awaiting costs", company: "Company-wide stock",
+    warehouse: "Store", shop: "Shop", transitAll: "In transit", inspection: "Inspection / damaged",
+    fromPo: "From purchase order", noPo: "Without PO (choose design)", supplierRef: "Supplier invoice no.",
+    expected: "Expected", received: "Received", postReceipt: "Record received goods",
+    approve: "Approve", reject: "Reject", dispatch: "Dispatch", confirmReceipt: "Confirm receipt",
+    requested: "Requested", approved: "Approved", dispatched: "Dispatched", status: "Status", to: "To", fromLoc: "From",
+    resolve: "Resolve", foundDelivered: "Found, delivered", returned: "Returned to store", writtenOff: "Lost (write off)",
+    startCount: "Start count (all items in stock)", countSheet: "Count sheet", counted: "Counted",
+    submitCount: "Submit count", system: "System", variance: "Variance", approveCount: "Approve count",
+    blindNote: "Count without seeing system quantities. Variances are shown to the approver only.",
+    when: "When", doc: "Document", change: "Change", newRequest: "Request stock from the Store", requestStock: "Send request",
+    overrideReason: "Reason to confirm your own dispatch (Owner only)", exportCsv: "Download CSV", period: "Period",
+    openingQty: "Opening", inbound: "In", outbound: "Out", closing: "Closing", openingNote: "Opening stock is a controlled document. It never silently overwrites quantities.",
+  },
+  purchasing: {
+    title: "Purchasing", suppliers: "Suppliers", newSupplier: "New supplier", phone: "Phone", country: "Country",
+    pos: "Purchase orders", newPo: "New PO", currency: "Currency", fx: "Rate (TZS per 1)", expectedAt: "Expected arrival",
+    unitPrice: "Unit price (PO currency)", createPo: "Create PO", receipts: "Receipts awaiting costs",
+    approveCosts: "Approve costs", unitCost: "Unit cost (TZS)", extras: "Extra costs (freight, duty, clearing)",
+    label: "Label", amount: "Amount (TZS)", allocation: "Allocate by", byValue: "Value", byQty: "Quantity",
+    costNote: "Costs are confidential (Owner only). Allocation is rounded so totals match exactly.",
+  },
+  importPage: {
+    intro: "Columns: design_code, design_name, category, color, size, retail_price, wholesale_price, barcode, supplier",
+    paste: "Paste CSV or upload a file", preview: "Preview", commit: "Import now", mode: "If a variant already exists",
+    createOnly: "Treat as error (no change)", updatePrices: "Update prices", rows: "Rows", errors: "Errors", ok: "OK",
+    result: "Result", template: "Download template", categories: "Allowed categories",
+  },
+  shop: { title: "Shop Stock", incoming: "Incoming goods", myRequests: "My requests" },
+};
+
+export const STOCK_DICTS: Record<Lang, StockDict> = { sw, en };
+export type { StockDict };

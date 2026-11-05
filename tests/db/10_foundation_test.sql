@@ -5,32 +5,7 @@
 \pset tuples_only on
 \pset format unaligned
 
-create schema if not exists test;
-create table test.results (n serial, name text, ok boolean, detail text);
-grant usage on schema test to anon, authenticated, service_role;
-grant insert, select on test.results to anon, authenticated, service_role;
-grant usage on sequence test.results_n_seq to anon, authenticated, service_role;
-
-create function test.ok(p_name text, p_cond boolean, p_detail text default null) returns void
-language sql as $$ insert into test.results (name, ok, detail) values (p_name, coalesce(p_cond,false), p_detail) $$;
-
--- Expect a statement to fail (any error). Records pass/fail.
-create function test.throws(p_name text, p_sql text) returns void language plpgsql as $$
-begin
-  begin
-    execute p_sql;
-    perform test.ok(p_name, false, 'no error raised');
-  exception when others then
-    perform test.ok(p_name, true, sqlerrm);
-  end;
-end $$;
-grant execute on all functions in schema test to anon, authenticated, service_role;
-
--- Act as a user: role + JWT claims (mirrors what PostgREST does per request).
-create function test.claims(p_uid uuid, p_aal text) returns text language sql as $$
-  select json_build_object('sub', p_uid, 'role', 'authenticated', 'aal', p_aal)::text
-$$;
-grant execute on function test.claims(uuid, text) to anon, authenticated, service_role;
+\ir _framework.sql
 
 -- Fixed test identities (synthetic; not real people)
 insert into auth.users (id, phone) values
@@ -237,16 +212,4 @@ select test.throws('audit: UPDATE blocked', $$update public.audit_log set reason
 select test.throws('audit: DELETE blocked', $$delete from public.audit_log$$);
 select test.throws('audit: TRUNCATE blocked', $$truncate public.audit_log$$);
 
--- ---------------------------------------------------------------- report
-\pset tuples_only off
-\pset format aligned
-select n, case when ok then 'PASS' else 'FAIL' end as result, name,
-       case when ok then '' else coalesce(detail, '') end as detail
-from test.results order by n;
-select count(*) filter (where ok) as passed, count(*) filter (where not ok) as failed from test.results;
-select case when exists (select 1 from test.results where not ok) then 1 else 0 end as failures \gset
-\if :failures
-  \echo 'DB TESTS FAILED'
-  \quit 3
-\endif
-\echo 'ALL DB TESTS PASSED'
+\ir _report.sql
