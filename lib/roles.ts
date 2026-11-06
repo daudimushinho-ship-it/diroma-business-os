@@ -21,20 +21,28 @@ export const LANDING: Record<AppRole, string> = {
 
 export type NavKey =
   | "overview" | "operations" | "sell" | "products" | "store" | "shopStock" | "wholesale"
-  | "purchasing" | "money" | "customers" | "reports" | "team" | "control" | "settings" | "help";
+  | "purchasing" | "money" | "customers" | "sales" | "approvals" | "reports" | "team" | "control" | "settings" | "help";
 
-export type NavItem = { key: NavKey; href: string; permission: string | null; icon: string };
+/** A permission requirement: one code, any of several codes, or none. */
+export type Need = string | readonly string[] | null;
+
+export type NavItem = { key: NavKey; href: string; permission: Need; icon: string };
+
+export const MONEY_AREA = ["money.view", "money.transfer", "expenses.request", "expenses.approve", "expenses.pay", "shift.review", "deliveries.manage", "journal.view"] as const;
+export const APPROVALS_AREA = ["approvals.decide", "returns.approve", "expenses.approve", "shift.review"] as const;
 
 export const NAV: NavItem[] = [
   { key: "overview",   href: "/overview",   permission: "overview.business",   icon: "grid" },
   { key: "operations", href: "/operations", permission: "overview.operations", icon: "grid" },
   { key: "sell",       href: "/pos",        permission: "pos.sell",            icon: "cart" },
+  { key: "sales",      href: "/sales",      permission: "sales.view",          icon: "receipt" },
   { key: "products",   href: "/products",   permission: "products.view",       icon: "tag" },
   { key: "store",      href: "/store",      permission: "store.operate",       icon: "box" },
   { key: "shopStock",  href: "/shop-stock", permission: "shop_stock.view",     icon: "shop" },
   { key: "wholesale",  href: "/wholesale",  permission: "wholesale.manage",    icon: "truck" },
   { key: "purchasing", href: "/purchasing", permission: "purchasing.manage",   icon: "receipt" },
-  { key: "money",      href: "/money",      permission: "money.view",          icon: "wallet" },
+  { key: "approvals",  href: "/approvals",  permission: [...APPROVALS_AREA, "pos.sell"], icon: "check" },
+  { key: "money",      href: "/money",      permission: MONEY_AREA,            icon: "wallet" },
   { key: "customers",  href: "/customers",  permission: "customers.view",      icon: "users" },
   { key: "reports",    href: "/reports",    permission: "reports.view",        icon: "chart" },
   { key: "team",       href: "/team",       permission: "team.view",           icon: "team" },
@@ -43,8 +51,10 @@ export const NAV: NavItem[] = [
   { key: "help",       href: "/help",       permission: null,                  icon: "help" },
 ];
 
-export function can(ws: Pick<Workspace, "permissions">, permission: string | null): boolean {
-  return permission === null || ws.permissions.includes(permission);
+export function can(ws: Pick<Workspace, "permissions">, permission: Need): boolean {
+  if (permission === null) return true;
+  if (typeof permission === "string") return ws.permissions.includes(permission);
+  return permission.some((p) => ws.permissions.includes(p));
 }
 
 /** Navigation is a convenience filter only; the database enforces every permission independently. */

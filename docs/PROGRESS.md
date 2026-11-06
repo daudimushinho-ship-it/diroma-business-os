@@ -1,6 +1,6 @@
 # Ubao wa Maendeleo / Progress Board
 
-_Imesasishwa: 5 Novemba 2026. Kipimo: Milestones A–B za "DIROMA Master Prompt"._
+_Imesasishwa: 6 Novemba 2026. Kipimo: Milestones A–C za "DIROMA Master Prompt"._
 
 ## ✅ Imekamilika
 
@@ -46,14 +46,57 @@ _Imesasishwa: 5 Novemba 2026. Kipimo: Milestones A–B za "DIROMA Master Prompt"
 - **Ripoti ya kipindi** (mwanzo / ingia / toka / mwisho), inayohesabiwa upande wa server, na **CSV export** iliyolindwa dhidi ya formula injection.
 - **Stoki ya Dukani:** stoki kwa saizi, mzigo unaoingia, kuomba mzigo, maombi yangu, historia, ripoti.
 
+### Milestone C: POS, malipo, fedha na kufunga zamu
+- **POS** (desktop safu 3; simu hatua 3: Tafuta → Kikapu → Malipo):
+  - Lazima uchague rangi na saizi. **Bei inawekwa na server** kutoka kwenye catalogue, si kutoka kwenye skrini.
+  - Bidhaa isiyo na bei haiuzwi.
+  - Bei ya jumla inatumika kwa mteja wa jumla tu.
+  - Malipo mchanganyiko (cash + M-Pesa + benki + salio la mteja).
+  - Kupeleka kwa mteja (delivery fee), na mauzo yaliyosahaulika (tarehe ya nyuma) kwa idhini.
+  - Risiti yenye namba ya kipekee. Kuchapisha tena hakurekodi mauzo upya.
+- **Idhini zinazofungwa na ombi lenyewe.** Punguzo juu ya kikomo (Muuzaji 5%, Meneja 15%), tarehe ya nyuma, na mkopo juu ya kikomo vinahitaji mtu mwingine kuidhinisha. Ombi likibadilika baada ya idhini (mfano idadi), idhini haifanyi kazi, na idhini moja haitumiki mara mbili.
+- **Mkopo:**
+  - Mteja wa kupita lazima alipe yote.
+  - Mteja aliyesajiliwa anakopeshwa ndani ya kikomo chake.
+  - Makusanyo yanalipa deni la zamani kwanza (FIFO), na ziada inakuwa salio la mteja.
+  - **Kukusanya deni la zamani si mauzo mapya.**
+- **Marejesho:**
+  - Ombi → idhini huru → bidhaa zinaingia **Ukaguzi**, hazirudi moja kwa moja dukani.
+  - Kiasi kinapunguza deni la mauzo hayo kwanza; kinachobaki kinakuwa salio la mteja au pesa ya kurudisha.
+  - Pesa hairudishwi mara mbili, hata ombi likirudiwa.
+  - Baada ya ukaguzi: zinarudi dukani au zinaenda "zimeharibika".
+- **Mauzo yasiyofika (failed delivery):** ni hali tu, bidhaa hazirudi stoo kimya kimya.
+- **Fedha:**
+  - Akaunti (droo ya kila duka, M-Pesa, benki) na salio la kuanzia (mara moja tu).
+  - **Kuweka benki** ni uhamisho: pesa iko "njiani" hadi mtu mwingine athibitishe, na ada inarekodiwa kama matumizi peke yake.
+  - **Matumizi:** ombi → idhini huru → kulipwa mara moja tu.
+  - **Posho za usafirishaji:** posho si matumizi. Matumizi yanarekodiwa mara moja tu, wakati wa kufunga posho.
+- **Kufunga zamu:**
+  - Kinachotarajiwa = float + pesa taslimu iliyoingia − iliyotoka (kwenye droo hiyo tu; M-Pesa na benki hazihesabiwi).
+  - Tofauti lazima ielezwe, na inakaguliwa na mtu huru kisha inarekodiwa kama "cash over/short".
+  - Mauzo yanayoendelea wakati wa kufunga yanasubiriwa na kujumuishwa. Baada ya kufunga, hakuna mauzo mapya kwenye zamu hiyo.
+- **Ledger ya double-entry:**
+  - Kila tukio lina entry inayolingana (debit = credit), inayokaguliwa mara mbili.
+  - Journal haiwezi kubadilishwa wala kufutwa.
+  - COGS kwa gharama ya wastani wakati wa mauzo. Gharama isiyojulikana **inaonyeshwa wazi**, haigeuzwi kuwa sifuri.
+  - Risiti za manunuzi, upotevu wa njiani na tofauti za kuhesabu sasa zinaingia kwenye ledger.
+- **Kurasa:** POS, Zamu yangu, Risiti, Rejista ya mauzo, Mauzo moja (marejesho, kurudisha pesa, kupeleka), Wateja (salio, makusanyo), Idhini, Fedha (akaunti, kuweka benki, matumizi, posho, journal), Ukaguzi kwenye Stoo.
+- **Muhtasari wa Owner** wenye takwimu halisi kutoka kwenye ledger:
+  - Mauzo halisi (kwa tarehe ya mauzo) dhidi ya makusanyo (kwa tarehe ya malipo).
+  - Faida ghafi, pamoja na onyo vipande vikiuzwa bila gharama inayojulikana.
+  - Pesa kwa aina, madeni, salio za wateja, stoki inayouzika, na thamani ya stoki.
+
 ## 🧪 Ushahidi wa majaribio
 | Jaribio | Matokeo |
 |---|---|
 | `npm run test:db`, Milestone A: ruhusa, RLS, MFA, activation, recovery, audit | **69/69 PASS** |
 | `npm run test:db`, Milestone B: catalogue, ledger, mifano ya master prompt, gharama, counts, import, ripoti | **74/74 PASS** |
-| Ushindani (vikao 2 halisi vya PostgreSQL): kipande cha mwisho, maombi yanayorudiwa kwa wakati mmoja | **7/7 PASS** |
-| Select contract: kila `.from().select()` ya app dhidi ya schema halisi | **36/36 OK** |
-| `npm test`: unit tests (simu, nenosiri, roles, barcode decode, CSV, RPC contract 38) | **75/75 PASS** |
+| `npm run test:db`, Milestone C: POS, idhini, mkopo, makusanyo, marejesho, matumizi, kuweka benki, posho, zamu, journal, muhtasari | **70/70 PASS** |
+| Ushindani B (vikao 2 halisi): kipande cha mwisho kwa transfer, maombi yanayorudiwa | **7/7 PASS** |
+| Ushindani C (vikao 2 halisi): wauzaji 2 wakiuza kipande cha mwisho; kufunga zamu wakati mauzo yanaendelea | **8/8 PASS** |
+| Select contract: kila `.from().select()` ya app dhidi ya schema halisi | **67/67 OK** |
+| `npm test`: unit tests (simu, nenosiri, roles, barcode decode, CSV, RPC contracts) | **103/103 PASS** |
+| POS terminal kwenye browser (data za majaribio): hesabu ya kikapu, "Lipa yote", desktop na simu | Imekaguliwa |
 | `tsc --noEmit`, `next build` | PASS |
 
 **Mifano ya lazima ya master prompt (§7B), yote imepita:**
@@ -62,14 +105,25 @@ _Imesasishwa: 5 Novemba 2026. Kipimo: Milestones A–B za "DIROMA Master Prompt"
 - **Kurudia kutuma au kuthibitisha:** idadi hazibadiliki.
 - **Watu wawili wakitoa kipande cha mwisho kwa wakati mmoja:** mmoja tu anafanikiwa.
 
-**Hitilafu 2 halisi zilizogunduliwa na majaribio kisha kurekebishwa:**
+**Mifano ya master prompt §17 iliyothibitishwa kwenye Milestone C:**
+- **Mauzo 2 ya wakati mmoja ya kipande cha mwisho:** moja tu linafanikiwa.
+- **Maombi yanayorudiwa:** hayarudii mauzo, stoki, malipo, kuweka benki, marejesho wala kurudisha pesa. Ufunguo uleule ukija na data tofauti, unakataliwa.
+- **Malipo kiasi, salio la mteja, mgawanyo, marejesho na kurudisha pesa** vinalingana na ledger.
+- **Hakuna kurudisha pesa juu ya kinachostahili,** na idhini ni huru.
+- **Kuweka benki si mapato wala matumizi;** posho ya usafirishaji haihesabiwi mara mbili.
+- **Kufunga zamu kunashughulikia mauzo yanayoendelea,** na M-Pesa/benki haziingii kwenye pesa ya droo.
+- **Gharama isiyojulikana haileti faida ya uongo.**
+
+**Hitilafu halisi zilizogunduliwa na majaribio kisha kurekebishwa:**
 - `count_decide` ilipitisha `bigint` kwa `_move(int)`.
 - Majaribio mabaya ya code yalikuwa yanafutwa pamoja na rollback, hivyo hayakuhesabiwa.
+- Trigger ya kukagua usawa wa journal ilifichwa na RLS (sasa ni `SECURITY DEFINER`).
+- Script ya majaribio haikurudisha exit code ya kosa. Sasa inarudisha.
 
 ## ⏳ Inasubiri uthibitisho kwenye Supabase halisi
 Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker images zimezuiwa, na ruhusa ya kujenga Auth ilikataliwa. Kwa hiyo haya hayajapimwa **end-to-end** kupitia skrini:
 1. Kuingia kwa simu + nenosiri (nafasi 4), MFA, kuwezesha mfanyakazi, kubadili nenosiri, rate limiting.
-2. Kurasa za Milestone B: Bidhaa, Stoo, Stoki ya Dukani, Manunuzi.
+2. Kurasa za Milestone B–C: Bidhaa, Stoo, Stoki ya Dukani, Manunuzi, POS, Mauzo, Wateja, Fedha, Idhini.
    - Mantiki yote iliyo nyuma yake imepimwa kwenye database.
    - Wito wote wa `rpc()` na `select` umethibitishwa kulingana na schema.
    - Kilichobaki ni kubofya skrini kwenye mfumo halisi.
@@ -82,12 +136,14 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 - **Logo rasmi ya DIROMA haijatolewa.**
 
 ## 📝 Maamuzi ya muda (yameandikwa wazi)
-- **Gharama ya wastani (avg cost):** kwa sasa ni wastani wa manunuzi yote yaliyoidhinishwa (cumulative purchase-weighted). Wastani endelevu unaoendana na COGS utaongezwa pamoja na mauzo katika Milestone C.
-- **Bidhaa iliyopotea njiani ("written off"):** inatoka kwenye stoki ya kampuni. Athari yake ya kifedha (hasara) itaingizwa kwenye ledger ya fedha katika Milestone C.
+- **Gharama ya wastani:** COGS inatumia wastani wa manunuzi yote yaliyoidhinishwa (cumulative purchase-weighted) wakati wa mauzo. Stoki ya mwanzo haina gharama hadi Owner aiweke, kwa hiyo thamani ya stoki kwenye ledger inaweza kutofautiana kidogo na idadi × wastani. Ripoti ya kulinganisha hizo mbili itakuja Milestone E.
+- **Droo ya pesa:** float ya kuanzia zamu haiingizwi kwenye ledger (ni pesa iliyokuwepo tayari). Tumia "salio la kuanzia" la akaunti ya droo ikiwa unataka salio la droo kwenye rekodi lilingane na pesa halisi.
+- **Kufungua tena zamu iliyofungwa:** bado haijajengwa. Marekebisho yanafanywa kwa entry mpya, si kwa kufuta.
+- **Uthibitisho wa M-Pesa:** malipo yote yamewekwa alama "manual" (yameingizwa kwa mkono). Kulinganisha na statement ya M-Pesa kutakuja na integrations.
+- **Kodi (TRA/EFD) na mishahara:** hazijajengwa, na hazitabuniwa bila nyaraka rasmi.
 - **Saa za biashara:** Africa/Dar_es_Salaam (UTC+03:00, haina DST). Mipaka ya siku kwenye ripoti inafuata saa hizi.
 
 ## ⏭️ Inayofuata
-- **C:** POS (lazima uchague saizi, bei ya variant), malipo (cash/M-Pesa/benki, malipo kiasi au mchanganyiko), matumizi, marejesho + ukaguzi, akaunti za pesa, kufunga zamu, ledger ya fedha (double-entry), COGS.
 - **D:** **Wateja wa Jumla** na consignment.
 - **E–G:** ripoti kamili, PDF za kila siku, backup na restore, timu, usalama, handover.
 
@@ -98,9 +154,10 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 | Catalogue, variants, barcodes, CSV import | Implemented and tested (DB + unit) |
 | Stock ledger, Stoo, maombi, transfers, mapungufu, counts | Implemented and tested (DB + concurrency) |
 | Manunuzi, landed cost, usiri wa gharama | Implemented and tested (DB) |
-| Kurasa za Milestone B (UI) | Implemented, unverified end-to-end |
+| POS, idhini, mkopo, makusanyo, marejesho, ukaguzi | Implemented and tested (DB + concurrency) |
+| Akaunti za pesa, kuweka benki, matumizi, posho, kufunga zamu, journal | Implemented and tested (DB + concurrency) |
+| Kurasa za Milestone B–C (UI) | Implemented, unverified end-to-end (POS terminal imekaguliwa kwa data za majaribio) |
 | Login simu+nenosiri, MFA, activation (Supabase Auth) | Needs external configuration |
 | SMS recovery | Planned |
-| POS, Pesa, Kufunga zamu | Planned (C) |
 | Wateja wa Jumla / Consignment | Planned (D) |
 | Ripoti kamili, backups | Planned (E) |

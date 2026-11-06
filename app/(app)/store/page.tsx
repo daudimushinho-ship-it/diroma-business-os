@@ -12,7 +12,8 @@ import { Counts } from "@/components/stock/Counts";
 import { Movements } from "@/components/stock/Movements";
 import { PeriodReport } from "@/components/stock/PeriodReport";
 import { Opening } from "@/components/stock/Opening";
-import { getStockDict } from "@/lib/lang";
+import { Inspection } from "@/components/stock/Inspection";
+import { getSalesDict } from "@/lib/lang";
 import { requireWorkspace } from "@/lib/workspace";
 import { can } from "@/lib/roles";
 import { pickLocation } from "@/lib/stock";
@@ -21,7 +22,7 @@ type SP = { loc?: string; tab?: string; po?: string; design?: string; q?: string
 
 export default async function StorePage({ searchParams }: { searchParams: Promise<SP> }) {
   const ws = await requireWorkspace("store.operate");
-  const { s } = await getStockDict();
+  const { s, x } = await getSalesDict();
   const sp = await searchParams;
   const warehouses = ws.locations.filter((l) => l.kind === "warehouse");
   const loc = pickLocation(ws.locations, ["warehouse"], sp.loc);
@@ -37,6 +38,7 @@ export default async function StorePage({ searchParams }: { searchParams: Promis
     { key: "transit", label: s.store.transit }, { key: "discrepancies", label: s.store.discrepancies },
     { key: "counts", label: s.store.counts }, { key: "movements", label: s.store.movements },
     { key: "reports", label: s.store.reports },
+    ...(can(ws, "inspection.release") ? [{ key: "inspection", label: x.inspection.title }] : []),
     ...(can(ws, "stock.opening") ? [{ key: "opening", label: s.store.opening }] : []),
   ];
   const tab = tabs.some((t) => t.key === sp.tab) ? sp.tab! : "overview";
@@ -62,6 +64,7 @@ export default async function StorePage({ searchParams }: { searchParams: Promis
       {tab === "movements" && <Movements locationId={loc.id} s={s} tz={ws.business.timezone} />}
       {tab === "reports" && <PeriodReport locationId={loc.id} s={s} from={sp.from} to={sp.to} base="/store" />}
       {tab === "opening" && <Opening locationId={loc.id} s={s} design={sp.design} back={back} />}
+      {tab === "inspection" && <Inspection x={x} back={back} />}
     </div>
   );
 }

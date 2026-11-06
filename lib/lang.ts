@@ -17,3 +17,9 @@ export async function getStockDict() {
   const lang = await getLang();
   return { lang, t: DICTS[lang], s: STOCK_DICTS[lang] };
 }
+
+export async function getSalesDict() {
+  const lang = await getLang();
+  const { SALES_DICTS } = await import("./i18n-sales");
+  return { lang, t: DICTS[lang], s: STOCK_DICTS[lang], x: SALES_DICTS[lang] };
+}

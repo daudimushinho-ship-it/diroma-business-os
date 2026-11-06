@@ -8,6 +8,6 @@ select count(*) filter (where ok) as passed, count(*) filter (where not ok) as f
 select case when exists (select 1 from test.results where not ok) then 1 else 0 end as failures \gset
 \if :failures
   \echo 'DB TESTS FAILED'
-  \quit 3
+  do $$ begin raise exception 'database tests failed'; end $$;
 \endif
 \echo 'ALL DB TESTS PASSED'
