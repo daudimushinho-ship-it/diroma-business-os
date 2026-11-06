@@ -177,7 +177,7 @@ _Imesasishwa: 9 Novemba 2026. Kipimo: Milestones A–G za "DIROMA Master Prompt"
 - **Ukaguzi wa ufikivu (axe-core) na CSP** kwenye kila ukurasa wa umma na wa kuingia: hakuna kosa la ufikivu, hakuna ukiukaji wa CSP, na kurasa zinafanya kazi (hydrated).
 - **Jaribio la mzigo (pgbench):** wauzaji 8 kwa wakati mmoja kwa sekunde 20.
 - **Jaribio la siri:** hakuna ufunguo wa siri (service role, CRON_SECRET) unaoweza kufika kwenye code ya browser.
-- **CI** (`.github/workflows/ci.yml`): tsc, unit tests, npm audit, majaribio ya database na build. Itaendeshwa na GitHub Actions kwenye kila push.
+- **CI** (`.github/workflows/ci.yml`): tsc, unit tests, npm audit, majaribio ya database na build. Inaendeshwa na GitHub Actions kwenye kila pull request na kila push kwenda `main`.
 - **Nyaraka za makabidhiano:** `HANDOVER.md`, `ACCEPTANCE.md`, `DEPLOY.md`, `MIGRATION.md`, `SECURITY.md`, na miongozo ya nafasi 4 ndani ya `docs/guides/`.
 
 ### 🔐 Marekebisho ya usalama yaliyogunduliwa kwenye Milestone F
