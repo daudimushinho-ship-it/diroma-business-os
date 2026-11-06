@@ -221,7 +221,7 @@ Imesanidiwa kupitia Supabase Management API kwa token ya muda iliyowekwa na Mmil
 - **Usanidi wa Mmiliki: PASS (end-to-end kwenye mfumo halisi, 6 Nov 2026).**
   - Mtiririko: `/setup` kwa code ya mara moja → akaunti → MFA (TOTP) → Muhtasari wa Biashara.
   - DB inaonyesha: membership `owner`/`active`, MFA factor 1 imethibitishwa, anwani ya ndani ipo, na audit `owner.bootstrap`.
-- **Bado:** kuwezesha wafanyakazi, kurasa za kazi (POS, Stoo n.k.) na cron hazijapimwa end-to-end; kwa hiyo kurasa za app hazijapimwa end-to-end, na code ya usanidi ya Mmiliki haijatolewa (inaisha baada ya saa 24, kwa hiyo itatolewa hosting ikishakuwa tayari).
+- **Bado:** kuwezesha wafanyakazi, kurasa za kazi (POS, Stoo n.k.) na cron hazijapimwa end-to-end.
 
 ## 🧪 Ushahidi wa majaribio
 | Jaribio | Matokeo |
