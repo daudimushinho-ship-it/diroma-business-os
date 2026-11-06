@@ -1,6 +1,6 @@
 # Ubao wa Maendeleo / Progress Board
 
-_Imesasishwa: 7 Novemba 2026. Kipimo: Milestones A–D za "DIROMA Master Prompt"._
+_Imesasishwa: 8 Novemba 2026. Kipimo: Milestones A–E za "DIROMA Master Prompt"._
 
 ## ✅ Imekamilika
 
@@ -110,6 +110,37 @@ _Imesasishwa: 7 Novemba 2026. Kipimo: Milestones A–D za "DIROMA Master Prompt"
   - **Mfumo hautumi ujumbe wenyewe**, na haudai kuwa umefika.
 - **Stoo:** tab mpya "Tuma kwa mbia". **Idhini:** sehemu mpya "Upotevu unaosubiri uamuzi".
 
+### Milestone E: Ripoti, PDF za kila siku, backup na urejeshaji
+- **Ripoti 12 zinazohesabiwa na server kwa kipindi chote** (hakuna kukatwa kwa kurasa):
+  - mauzo, makusanyo, kulinganisha mauzo na makusanyo, faida na hasara (P&L);
+  - utendaji wa bidhaa (sell-through, faida %), stoki na thamani (umri, siku za stoki);
+  - umri wa madeni, matumizi, wafanyakazi, wateja wa jumla, mambo yasiyo ya kawaida, na trial balance.
+- **Tarehe ziko wazi:**
+  - Mauzo yanahesabiwa kwa tarehe ya mauzo, makusanyo kwa tarehe ya malipo, na salio "hadi tarehe fulani".
+  - Muda ni Africa/Dar_es_Salaam.
+- **Kulinganisha mauzo na makusanyo:**
+  - Makusanyo = mauzo halisi + kupeleka − mabadiliko ya madeni + mabadiliko ya salio za wateja + pesa zilizorudishwa.
+  - Tofauti isiyoelezeka imepimwa kuwa **0**.
+- **Vipindi:** leo, jana, wiki, siku 7, mwezi, mwezi uliopita, robo, nusu mwaka, mwaka, au tarehe unazochagua.
+  - **Ulinganisho ni wa kipindi sawa.** Mfano: tarehe 1–15 Nov inalinganishwa na 1–15 Okt, si Oktoba yote.
+  - Ulinganisho unaandikwa "haupatikani" kama hakuna data ya kipindi hicho.
+- **Usiri:**
+  - Gharama na faida zinaonekana kwa wenye ruhusa ya gharama tu.
+  - Meneja haoni P&L wala trial balance.
+  - Muuzaji haoni ripoti.
+- **Export:**
+  - CSV, iliyolindwa dhidi ya formula injection.
+  - PDF yenye nembo, kipindi, muda, aliyeitengeneza, namba ya rejea, jumla, na "Page X of Y".
+- **PDF ya kila siku** (saa 23:30 ya siku, na ya mwisho saa 00:15 kwa siku iliyopita):
+  - Inatengenezwa na server, kwa hiyo haihitaji simu wala browser kuwa wazi.
+  - **Inazuia nakala zinazojirudia:** kama hakuna data mpya, toleo jipya haliundwi. Data ikiongezeka baadaye, toleo la 2 linaundwa.
+  - Ikishindwa, inajaribiwa tena hadi mara 3.
+  - Inahifadhiwa kwenye storage ya siri pamoja na SHA-256.
+  - Kituo cha Udhibiti kinaonyesha hali yake, na PDF inapakuliwa kwa kiungo cha sekunde 60.
+- **Backup:**
+  - `scripts/backup.sh` inachukua data yote kwa wakati mmoja (snapshot moja), inaisimba kwa AES-256, na inatengeneza manifest yenye idadi za rekodi, jumla za ledger na checksums.
+  - `scripts/restore-verify.sh` inarejesha kwenye database tupu tofauti, kisha inathibitisha kuwa **kila namba inalingana**.
+
 ## 🧪 Ushahidi wa majaribio
 | Jaribio | Matokeo |
 |---|---|
@@ -120,8 +151,10 @@ _Imesasishwa: 7 Novemba 2026. Kipimo: Milestones A–D za "DIROMA Master Prompt"
 | Ushindani C (vikao 2 halisi): wauzaji 2 wakiuza kipande cha mwisho; kufunga zamu wakati mauzo yanaendelea | **8/8 PASS** |
 | `npm run test:db`, Milestone D: consignment, taarifa, upotevu, mauzo ya jumla, statement, usiri | **44/44 PASS** |
 | Ushindani D (vikao 2 halisi): watu 2 wakiripoti kipande cha mwisho kilichopo kwa mbia | **6/6 PASS** |
-| Select contract: kila `.from().select()` ya app dhidi ya schema halisi | **80/80 OK** |
-| `npm test`: unit tests (simu, nenosiri, roles, barcode decode, CSV, RPC contracts) | **115/115 PASS** |
+| `npm run test:db`, Milestone E (ndani ya suite ya mauzo, 97 kwa jumla): ripoti zinalingana na ledger, kulinganisha = 0, mauzo 300 ya ziada yote yamehesabiwa, usiri, matoleo ya kazi za kila siku | **97/97 PASS** |
+| Backup → restore → verify kwenye PostgreSQL halisi: kila idadi/jumla/checksum, RLS bado inafanya kazi, ufunguo usio sahihi unakataliwa, faili lililobadilishwa linagunduliwa | **11/11 PASS** |
+| Select contract | **81/81 OK** |
+| `npm test`: unit tests (pamoja na PDF: maandishi yanatolewa na kuthibitishwa "Page X of Y"; PDF ya kila siku kutoka snapshot halisi; vipindi) | **136/136 PASS** |
 | POS terminal kwenye browser (data za majaribio): hesabu ya kikapu, "Lipa yote", desktop na simu | Imekaguliwa |
 | `tsc --noEmit`, `next build` | PASS |
 
@@ -147,7 +180,13 @@ _Imesasishwa: 7 Novemba 2026. Kipimo: Milestones A–D za "DIROMA Master Prompt"
 - **Kurudia kutuma au kurudia taarifa hakubadilishi kitu.**
 - Mzigo alionao mbia kwenye rekodi za kutuma unalingana na stoki ya eneo lake kwenye ledger.
 
-**Hitilafu halisi zilizogunduliwa na majaribio kisha kurekebishwa:**
+**Hitilafu halisi zilizogunduliwa na majaribio ya Milestone E kisha kurekebishwa:**
+- Temp table ndani ya function ya `STABLE` (sasa inatumia CTE).
+- `pg_dump` inaongeza `CREATE SCHEMA public`, kwa hiyo restore ilishindwa. Sasa kipengee hicho kinarukwa.
+- Tarehe za kipindi cha "custom" zilikuwa zinabadilishwa nafasi baada ya kuwekewa ukomo wa leo.
+- Jaribio la RPC contract halikukubali tarakimu kwenye majina ya parameters.
+
+**Hitilafu halisi zilizogunduliwa na majaribio (Milestones A–D):**
 - `count_decide` ilipitisha `bigint` kwa `_move(int)`.
 - Majaribio mabaya ya code yalikuwa yanafutwa pamoja na rollback, hivyo hayakuhesabiwa.
 - Trigger ya kukagua usawa wa journal ilifichwa na RLS (sasa ni `SECURITY DEFINER`).
@@ -162,6 +201,7 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
    - Wito wote wa `rpc()` na `select` umethibitishwa kulingana na schema.
    - Kilichobaki ni kubofya skrini kwenye mfumo halisi.
 3. Barcode kwa scanner na printer halisi za dukani.
+4. **Kazi ya kila siku iliyo hosted** (Vercel Cron + kupakia kwenye Supabase Storage), na **backup za Supabase Pro/PITR**. Ripoti na restore zimethibitishwa hapa tu, si kwenye mfumo halisi.
 
 **Hatua inayofuata kwa Mmiliki:** fungua project ya bure ya Supabase (`docs/SETUP.md`). Kisha nitapima kila mtiririko kwenye skrini na kuandika hapa Pass/Fail.
 
@@ -180,7 +220,8 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 - **Saa za biashara:** Africa/Dar_es_Salaam (UTC+03:00, haina DST). Mipaka ya siku kwenye ripoti inafuata saa hizi.
 
 ## ⏭️ Inayofuata
-- **E–G:** ripoti kamili, PDF za kila siku, backup na restore, timu, usalama, handover.
+- **F:** malengo ya timu (mfano reels 3 kwa siku, posts 100 kwa mwezi), kazi za timu, commission (baada ya idhini ya viwango), catalogue ya umma (hiari), na integrations.
+- **G:** usalama (OWASP ASVS map), kujaribu kuhamisha data kutoka MauzoTrack, majaribio kwenye vifaa halisi, na handover.
 
 ## Hali ya moduli (capability matrix)
 | Uwezo | Hali |
@@ -197,4 +238,7 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 | Wateja wa Jumla / Consignment, statements, ukumbusho | Implemented and tested (DB + concurrency) |
 | Kurasa za Wateja wa Jumla (UI) | Implemented, unverified end-to-end |
 | Portal ya mbia, ujumbe wa mfumo | Planned |
-| Ripoti kamili, backups | Planned (E) |
+| Ripoti 12 za vipindi, ulinganisho, CSV/PDF | Implemented and tested (DB + unit) |
+| PDF ya kila siku (cron + storage) | Implemented; needs external configuration (CRON_SECRET, bucket, hosting) |
+| Backup iliyosimbwa + restore inayothibitishwa | Implemented and tested (local PostgreSQL) |
+| Backup za Supabase Pro / PITR / nakala ya storage | Needs external configuration + cost approval |

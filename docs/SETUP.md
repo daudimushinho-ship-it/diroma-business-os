@@ -42,6 +42,9 @@ Apply migrations in order (`supabase/migrations/*.sql`) with the Supabase CLI (`
 node --env-file=.env.local scripts/setup-owner.mjs   # prints the one-time Owner setup code
 ```
 ```bash
+node --env-file=.env.local scripts/setup-storage.mjs # private bucket for daily report PDFs
+```
+```bash
 npm run build && npm start
 ```
 
@@ -76,3 +79,9 @@ Those must be verified against a real Supabase project (see `docs/PROGRESS.md`, 
   and explicit permission checks.
 - `audit_log` is append-only (update/delete/truncate blocked by trigger, even for the table owner).
 - Exactly one Owner. Nobody can grant the Owner role or change their own role or status.
+
+### Scheduled daily reports
+- Set `CRON_SECRET` (`openssl rand -hex 32`) in the hosting environment. `vercel.json` schedules `/api/jobs/daily` at 20:30 UTC
+  (23:30 Dar, "interim") and 21:15 UTC (00:15 Dar, "final" for the previous day). Vercel Cron sends `Authorization: Bearer <CRON_SECRET>`.
+- Manual run (e.g. to test): `curl -H "Authorization: Bearer $CRON_SECRET" "https://<app>/api/jobs/daily?kind=interim&trigger=manual"`.
+- Results, failures and PDF downloads (60-second signed links) appear in **Control Center**. See `docs/RECOVERY.md` for backups.

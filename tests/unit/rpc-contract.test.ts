@@ -38,7 +38,7 @@ describe("RPC contract", () => {
   for (const file of [...tsFiles(join(root, "app")), ...tsFiles(join(root, "lib")), ...tsFiles(join(root, "components")), ...tsFiles(join(root, "scripts"))]) {
     const src = readFileSync(file, "utf8");
     for (const m of src.matchAll(/\.rpc\(\s*"([a-z_]+)"\s*(?:,\s*\{([^}]*)\})?/g)) {
-      const args = m[2] === undefined ? null : [...m[2].matchAll(/\b(p_[a-z_]+)\s*:/g)].map((a) => a[1]);
+      const args = m[2] === undefined ? null : [...m[2].matchAll(/\b(p_[a-z0-9_]+)\s*:/g)].map((a) => a[1]);
       calls.push({ file: file.slice(root.length + 1), fn: m[1], args });
     }
   }

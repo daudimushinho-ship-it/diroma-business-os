@@ -31,6 +31,9 @@ export const CAPABILITIES: Capability[] = [
   { key: "reminders",   sw: "Ukumbusho wa taarifa (kiungo cha WhatsApp + kumbukumbu)", en: "Update reminders (WhatsApp link + log)", state: "implemented", milestone: "D" },
   { key: "wholesaleui", sw: "Kurasa za Wateja wa Jumla (end-to-end na Supabase)", en: "Wholesale screens (end-to-end with Supabase)", state: "unverified", milestone: "D" },
   { key: "portal",      sw: "Portal ya mbia na ujumbe unaotumwa na mfumo", en: "Partner portal and system-sent messages", state: "planned", milestone: "F" },
-  { key: "reports",     sw: "Ripoti kamili, PDF za kila siku, backup", en: "Full reports, daily PDFs, backups", state: "planned", milestone: "E" },
+  { key: "reports",     sw: "Ripoti 12 za vipindi (server), ulinganisho, CSV/PDF", en: "12 server-side period reports, like-for-like comparison, CSV/PDF", state: "implemented", milestone: "E" },
+  { key: "dailypdf",    sw: "PDF ya kila siku 23:30 + ya mwisho 00:15 (matoleo, kurudia)", en: "Daily 23:30 PDF + 00:15 final (versions, retries)", state: "external", milestone: "E" },
+  { key: "backup",      sw: "Backup iliyosimbwa + jaribio la kurejesha linalothibitishwa", en: "Encrypted backup + verified restore drill", state: "implemented", milestone: "E" },
+  { key: "pitr",        sw: "Backup za Supabase Pro / PITR na nakala ya storage", en: "Supabase Pro backups / PITR and storage copy", state: "external", milestone: "E" },
   { key: "team",        sw: "Malengo ya timu, commission", en: "Team targets, commissions", state: "planned", milestone: "F" },
 ];

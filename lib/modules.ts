@@ -4,9 +4,6 @@ type Scope = { milestone: string; permission: string | null; sw: string[]; en: s
 
 /** Scope of modules not yet built (from the DIROMA master brief). Shown honestly as "Planned". */
 export const PLANNED: Record<string, Scope> = {
-  reports: { milestone: "E", permission: "reports.view",
-    sw: ["Mauzo kwa tarehe ya mauzo, makusanyo kwa tarehe ya malipo", "Faida yenye alama ya ukamilifu wa gharama", "PDF ya kila siku saa 23:30 na backup inayojaribiwa kurejeshwa"],
-    en: ["Sales by sale date, collections by payment date", "Profit with cost-completeness labels", "Daily 23:30 PDF and restore-tested backups"] },
   help: { milestone: "G", permission: null,
     sw: ["Miongozo mifupi kwa kila nafasi kwa Kiswahili", "Mawasiliano ya msaada yaliyowekwa na Mmiliki"],
     en: ["Short role-specific guides in Swahili and English", "Owner-configured support contact"] },

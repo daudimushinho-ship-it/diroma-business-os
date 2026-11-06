@@ -43,12 +43,16 @@ for t in "$ROOT"/tests/db/[0-9][0-9]_*_test.sql; do
   db="t_${name//[^a-zA-Z0-9]/_}"
   echo "=== $name"
   fresh_db "$db"
-  if ! "${PSQL[@]}" -d "$db" -f "$t"; then status=1; continue; fi
+  EXTRA=()
+  if [ -n "${REGEN_FIXTURES:-}" ] && [ "$name" = "30_sales_test" ]; then EXTRA=(-v "FIXTURE_OUT=$ROOT/tests/fixtures/daily-snapshot.json"); fi
+  if ! "${PSQL[@]}" "${EXTRA[@]}" -d "$db" -f "$t"; then status=1; continue; fi
   # optional companion shell test that reuses the same database state
   if [ -x "${t%_test.sql}_extra.sh" ]; then
     "${t%_test.sql}_extra.sh" "$db" || status=1
   fi
 done
+echo "=== backup → restore → verify"
+"$ROOT/tests/db/90_recovery_check.sh" t_40_wholesale_test "$ROOT/tests/db/00_supabase_stub.sql" "$WORK/recovery" || status=1
 echo "=== select contract (app columns vs real schema)"
 fresh_db t_select_contract
 if node "$ROOT/scripts/select-contract.mjs" > "$WORK/selects.sql" && "${PSQL[@]}" -d t_select_contract -f "$WORK/selects.sql" >/dev/null; then

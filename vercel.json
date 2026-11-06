@@ -1,0 +1,6 @@
+{
+  "crons": [
+    { "path": "/api/jobs/daily?kind=interim", "schedule": "30 20 * * *" },
+    { "path": "/api/jobs/daily?kind=final", "schedule": "15 21 * * *" }
+  ]
+}

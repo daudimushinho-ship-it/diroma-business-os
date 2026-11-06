@@ -330,4 +330,5 @@ select test.throws('JOURNAL: entries cannot be deleted', $$delete from public.jo
 select test.throws('JOURNAL: unbalanced entry rejected', $$select public._post_journal((select id from public.businesses), current_date, 'x', null, 'x', null,
   '[{"account":"4000","credit":5},{"account":"1100","debit":4}]')$$);
 
+\ir _reports_checks.sql
 \ir _report.sql
