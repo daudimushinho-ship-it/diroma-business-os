@@ -9,6 +9,7 @@ import { can } from "@/lib/roles";
 import { db, getDesign } from "@/lib/stock";
 import { tzs } from "@/lib/format";
 import { addVariant, setPrices } from "@/app/actions/stock";
+import { publishDesign } from "@/app/actions/team-work";
 
 export default async function DesignPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; err?: string }> }) {
   const ws = await requireWorkspace("products.view");
@@ -23,6 +24,7 @@ export default async function DesignPage({ params, searchParams }: { params: Pro
   for (const r of stock ?? []) totals[r.variant_id] = (totals[r.variant_id] ?? 0) + r.on_hand;
   const manage = can(ws, "products.manage");
   const back = `/products/${id}`;
+  const { data: pub } = await supabase.from("designs").select("published, show_price, public_description").eq("id", id).maybeSingle();
   return (
     <div className="mx-auto max-w-6xl space-y-6">
       <PageHeader title={design.name} subtitle={`${design.code} · ${design.category}`}>
@@ -68,6 +70,15 @@ export default async function DesignPage({ params, searchParams }: { params: Pro
           </tbody>
         </table>
       </section>
+      {manage && pub && (
+        <form action={publishDesign} className="card flex flex-wrap items-end gap-3 p-5 text-sm">
+          <input type="hidden" name="design" value={id} /><input type="hidden" name="back" value={back} />
+          <label className="flex items-center gap-2"><input type="checkbox" name="published" defaultChecked={pub.published} /> Public catalogue</label>
+          <label className="flex items-center gap-2"><input type="checkbox" name="show_price" defaultChecked={pub.show_price} /> {s.retail}</label>
+          <input name="description" defaultValue={pub.public_description ?? ""} placeholder="Public description" className="input min-w-60 flex-1" />
+          <button className="btn btn-ghost">{s.save}</button>
+        </form>
+      )}
       {manage && (
         <section className="card p-5">
           <h2 className="mb-3 font-semibold">{s.addVariant}</h2>

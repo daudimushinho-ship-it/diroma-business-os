@@ -50,7 +50,7 @@ const sw = {
   roles: { owner: "Mmiliki", manager: "Meneja", sales_staff: "Muuzaji", storekeeper: "Mtunza Stoo" } as Record<AppRole, string>,
   nav: {
     overview: "Muhtasari wa Biashara", operations: "Muhtasari wa Shughuli", sell: "Uza (POS)", products: "Bidhaa",
-    store: "Stoo", shopStock: "Stoki ya Dukani", wholesale: "Wateja wa Jumla", purchasing: "Manunuzi", sales: "Mauzo", approvals: "Idhini", money: "Fedha", customers: "Wateja",
+    store: "Stoo", shopStock: "Stoki ya Dukani", wholesale: "Wateja wa Jumla", purchasing: "Manunuzi", sales: "Mauzo", approvals: "Idhini", performance: "Utendaji wa timu", money: "Fedha", customers: "Wateja",
     reports: "Ripoti", team: "Timu", control: "Kituo cha Udhibiti", settings: "Mipangilio", help: "Msaada",
   } as Record<NavKey, string>,
   mfa: {
@@ -148,7 +148,7 @@ const en: Dict = {
   roles: { owner: "Owner", manager: "Manager", sales_staff: "Sales Staff", storekeeper: "Storekeeper" },
   nav: {
     overview: "Business Overview", operations: "Operations Overview", sell: "Sell (POS)", products: "Products",
-    store: "Store / Stoo", shopStock: "Shop Stock", wholesale: "Wholesale Customers", purchasing: "Purchasing", sales: "Sales register", approvals: "Approvals", money: "Money", customers: "Customers",
+    store: "Store / Stoo", shopStock: "Shop Stock", wholesale: "Wholesale Customers", purchasing: "Purchasing", sales: "Sales register", approvals: "Approvals", performance: "Team performance", money: "Money", customers: "Customers",
     reports: "Reports", team: "Team", control: "Control Center", settings: "Settings", help: "Help",
   },
   mfa: {

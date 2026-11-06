@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
-const PUBLIC_PATHS = ["/login", "/activate", "/setup", "/forbidden", "/lang"];
+const PUBLIC_PATHS = ["/login", "/activate", "/setup", "/forbidden", "/lang", "/c"];
 
 /** Refreshes the Supabase session cookie and sends unauthenticated visitors to /login. */
 export async function proxy(request: NextRequest) {

@@ -1,6 +1,6 @@
 # Ubao wa Maendeleo / Progress Board
 
-_Imesasishwa: 8 Novemba 2026. Kipimo: Milestones A–E za "DIROMA Master Prompt"._
+_Imesasishwa: 9 Novemba 2026. Kipimo: Milestones A–F za "DIROMA Master Prompt"._
 
 ## ✅ Imekamilika
 
@@ -141,6 +141,35 @@ _Imesasishwa: 8 Novemba 2026. Kipimo: Milestones A–E za "DIROMA Master Prompt"
   - `scripts/backup.sh` inachukua data yote kwa wakati mmoja (snapshot moja), inaisimba kwa AES-256, na inatengeneza manifest yenye idadi za rekodi, jumla za ledger na checksums.
   - `scripts/restore-verify.sh` inarejesha kwenye database tupu tofauti, kisha inathibitisha kuwa **kila namba inalingana**.
 
+### Milestone F: Timu, malengo, commission na catalogue ya umma
+- **Malengo ya maudhui (msingi wa master prompt):** reels 3 kwa siku, 21 kwa wiki, na 3 × siku za mwezi kwa mwezi (mfano Novemba = 90). Posts za bidhaa ni 100 kwa mwezi. **Owner anaweza kuyabadilisha.**
+- **Malengo ya mauzo hayabuniwi.** Yanaonekana tu Owner akiyaweka (kwa biashara au kwa mfanyakazi). Maendeleo yanahesabiwa kutoka kwenye mauzo halisi, baada ya marejesho.
+- **Maudhui yenye ushahidi:**
+  - Kila reel au post inahitaji kiungo `https://`. Kiungo kimoja hakihesabiwi mara mbili, na huwezi kurekodi posts za zaidi ya siku 31 zilizopita.
+  - **Mtu mwingine anathibitisha.** Post iliyokataliwa haihesabiwi.
+- **Kazi:** Meneja anampa mfanyakazi kazi yenye muda wa mwisho. Mhusika peke yake ndiye anaimaliza, na lazima aweke ushahidi. Meneja anaithibitisha, au anairudisha akieleza kinachokosekana. Zilizochelewa zinaonyeshwa.
+- **Wateja watarajiwa:**
+  - Mtiririko ni ombi → ufuatiliaji → kufika dukani → **kuunganishwa kwa mauzo kwa mkono**. Mfumo haukisii.
+  - Mteja akijulikana, mauzo lazima yawe yake. Asipojulikana, sababu lazima iandikwe.
+  - Mauzo moja hayahesabiwi kwa maombi mawili.
+  - Kuna ripoti ya "wanatoka wapi" kwa kila chanzo (Instagram, WhatsApp, n.k.).
+- **Commission:**
+  - Viwango vinawekwa na Owner tu (si zaidi ya 50%). Kunaweza kuwa na mpango kwa nafasi, au kwa mtu mmoja.
+  - Inaweza kuwa na kiwango cha chini cha mauzo, au sharti la kazi zote kuthibitishwa.
+  - **Marejesho yanakatwa.**
+  - Mtiririko ni: kuhesabiwa → kuidhinishwa na mtu mwingine (ikirekodiwa kwenye ledger kama deni la kulipa) → kulipwa mara moja kutoka benki au simu.
+  - Hakuna vipindi vinavyopishana. Mfanyakazi anaona commission yake tu, baada ya kuidhinishwa.
+  - **Hakuna makato ya kisheria yanayobuniwa.**
+  - P&L na muhtasari sasa vinajumuisha commission.
+- **Catalogue ya umma `/c/<slug>`** (hiari): designs zilizochapishwa tu, bei ya "kuanzia" ya rejareja, na saizi "ipo / haipo". Hakuna gharama, bei ya jumla wala idadi kamili ya stoki. Ina kitufe cha "Uliza WhatsApp" na QR code ya kuchapisha.
+- **Integrations (Mipangilio):** inaonyesha kwa uaminifu kipi kimesanidiwa na kipi bado (SMS, WhatsApp API, M-Pesa API, TRA/EFD).
+
+### 🔐 Marekebisho ya usalama yaliyogunduliwa kwenye Milestone F
+PostgreSQL inampa kila mtu (`PUBLIC`) ruhusa ya kuendesha function mpya kwa default. Functions za Milestones C–F, zikiwemo za ndani kama `_post_journal` na `_move`, na za server pekee kama `daily_snapshot`, zingeweza kuitwa na mtumiaji yeyote, hata asiyeingia.
+- **Imerekebishwa:** migration mpya inafunga kila kitu, kisha inatoa ruhusa kwa majina tu.
+- **Jaribio jipya la kudumu (`60_privileges_test`, ukaguzi 9) linashindwa mara moja kama tatizo hili litarudi.** Nimethibitisha kuwa linashindwa (mara 5) bila marekebisho haya.
+- Pia linakagua kuwa kila jedwali lina RLS, na kwamba watumiaji hawana INSERT/UPDATE/DELETE moja kwa moja.
+
 ## 🧪 Ushahidi wa majaribio
 | Jaribio | Matokeo |
 |---|---|
@@ -153,8 +182,10 @@ _Imesasishwa: 8 Novemba 2026. Kipimo: Milestones A–E za "DIROMA Master Prompt"
 | Ushindani D (vikao 2 halisi): watu 2 wakiripoti kipande cha mwisho kilichopo kwa mbia | **6/6 PASS** |
 | `npm run test:db`, Milestone E (ndani ya suite ya mauzo, 97 kwa jumla): ripoti zinalingana na ledger, kulinganisha = 0, mauzo 300 ya ziada yote yamehesabiwa, usiri, matoleo ya kazi za kila siku | **97/97 PASS** |
 | Backup → restore → verify kwenye PostgreSQL halisi: kila idadi/jumla/checksum, RLS bado inafanya kazi, ufunguo usio sahihi unakataliwa, faili lililobadilishwa linagunduliwa | **11/11 PASS** |
-| Select contract | **81/81 OK** |
-| `npm test`: unit tests (pamoja na PDF: maandishi yanatolewa na kuthibitishwa "Page X of Y"; PDF ya kila siku kutoka snapshot halisi; vipindi) | **136/136 PASS** |
+| `npm run test:db`, Milestone F: malengo ya msingi, ushahidi, uthibitisho huru, kazi, attribution, commission na ledger, catalogue ya umma | **53/53 PASS** |
+| `npm run test:db`, ruhusa: hakuna function/jedwali lililo wazi kwa asiyestahili; kila jedwali lina RLS | **9/9 PASS** |
+| Select contract | **92/92 OK** |
+| `npm test`: unit tests (PDF, QR inayosomwa tena, vipindi, contracts n.k.) | **156/156 PASS** |
 | POS terminal kwenye browser (data za majaribio): hesabu ya kikapu, "Lipa yote", desktop na simu | Imekaguliwa |
 | `tsc --noEmit`, `next build` | PASS |
 
@@ -179,6 +210,11 @@ _Imesasishwa: 8 Novemba 2026. Kipimo: Milestones A–E za "DIROMA Master Prompt"
 - **Taarifa ya mbia inapunguza mzigo alionao tu**, haipunguzi tena Stoo.
 - **Kurudia kutuma au kurudia taarifa hakubadilishi kitu.**
 - Mzigo alionao mbia kwenye rekodi za kutuma unalingana na stoki ya eneo lake kwenye ledger.
+
+**Hitilafu halisi zilizogunduliwa na majaribio ya Milestone F kisha kurekebishwa:**
+- Ruhusa za functions zilizokuwa wazi (tazama sehemu ya usalama hapo juu).
+- Policies za commission zilikuwa zinaitana kila moja (infinite recursion).
+- Regex ya kiungo ilizidi kikomo cha PostgreSQL.
 
 **Hitilafu halisi zilizogunduliwa na majaribio ya Milestone E kisha kurekebishwa:**
 - Temp table ndani ya function ya `STABLE` (sasa inatumia CTE).
@@ -220,7 +256,6 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 - **Saa za biashara:** Africa/Dar_es_Salaam (UTC+03:00, haina DST). Mipaka ya siku kwenye ripoti inafuata saa hizi.
 
 ## ⏭️ Inayofuata
-- **F:** malengo ya timu (mfano reels 3 kwa siku, posts 100 kwa mwezi), kazi za timu, commission (baada ya idhini ya viwango), catalogue ya umma (hiari), na integrations.
 - **G:** usalama (OWASP ASVS map), kujaribu kuhamisha data kutoka MauzoTrack, majaribio kwenye vifaa halisi, na handover.
 
 ## Hali ya moduli (capability matrix)
@@ -237,6 +272,9 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 | SMS recovery | Planned |
 | Wateja wa Jumla / Consignment, statements, ukumbusho | Implemented and tested (DB + concurrency) |
 | Kurasa za Wateja wa Jumla (UI) | Implemented, unverified end-to-end |
+| Malengo, maudhui, kazi, wateja watarajiwa, commission | Implemented and tested (DB) |
+| Catalogue ya umma + QR | Implemented and tested (DB + QR decode); page needs Supabase to run |
+| Kurasa za Milestone F (UI) | Implemented, unverified end-to-end |
 | Portal ya mbia, ujumbe wa mfumo | Planned |
 | Ripoti 12 za vipindi, ulinganisho, CSV/PDF | Implemented and tested (DB + unit) |
 | PDF ya kila siku (cron + storage) | Implemented; needs external configuration (CRON_SECRET, bucket, hosting) |

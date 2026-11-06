@@ -28,3 +28,15 @@ describe("barcode labels", () => {
     expect(svg).not.toMatch(/TZS|price/i);
   });
 });
+
+describe("catalogue QR code", () => {
+  it("decodes back to the public catalogue URL", async () => {
+    const url = "https://diroma.example/c/diroma";
+    const png = PNG.sync.read(await bwipjs.toBuffer({ bcid: "qrcode", text: url, scale: 4, paddingwidth: 8, paddingheight: 8, backgroundcolor: "FFFFFF" }));
+    const lum = new Uint8ClampedArray(png.width * png.height);
+    for (let i = 0; i < lum.length; i++) lum[i] = png.data[i * 4];
+    const reader = new MultiFormatReader();
+    reader.setHints(new Map<DecodeHintType, unknown>([[DecodeHintType.POSSIBLE_FORMATS, [BarcodeFormat.QR_CODE]]]));
+    expect(reader.decode(new BinaryBitmap(new HybridBinarizer(new RGBLuminanceSource(lum, png.width, png.height)))).getText()).toBe(url);
+  });
+});

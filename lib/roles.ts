@@ -21,7 +21,7 @@ export const LANDING: Record<AppRole, string> = {
 
 export type NavKey =
   | "overview" | "operations" | "sell" | "products" | "store" | "shopStock" | "wholesale"
-  | "purchasing" | "money" | "customers" | "sales" | "approvals" | "reports" | "team" | "control" | "settings" | "help";
+  | "purchasing" | "money" | "customers" | "sales" | "approvals" | "performance" | "reports" | "team" | "control" | "settings" | "help";
 
 /** A permission requirement: one code, any of several codes, or none. */
 export type Need = string | readonly string[] | null;
@@ -44,6 +44,7 @@ export const NAV: NavItem[] = [
   { key: "approvals",  href: "/approvals",  permission: [...APPROVALS_AREA, "pos.sell"], icon: "check" },
   { key: "money",      href: "/money",      permission: MONEY_AREA,            icon: "wallet" },
   { key: "customers",  href: "/customers",  permission: "customers.view",      icon: "users" },
+  { key: "performance", href: "/performance", permission: "team.work",          icon: "chart" },
   { key: "reports",    href: "/reports",    permission: "reports.view",        icon: "chart" },
   { key: "team",       href: "/team",       permission: "team.view",           icon: "team" },
   { key: "control",    href: "/control",    permission: "audit.view",          icon: "shield" },
