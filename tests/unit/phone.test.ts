@@ -21,3 +21,17 @@ describe("normalizePhone", () => {
     expect(normalizePhone("0222123456").ok).toBe(false);
   });
 });
+
+import { authPlaceholderEmail } from "@/lib/phone";
+describe("authPlaceholderEmail", () => {
+  it("derives a non-deliverable address from the E.164 phone", () => {
+    expect(authPlaceholderEmail("+255712345678")).toBe("255712345678@phone.diroma.invalid");
+  });
+  it("is stable for the same phone and distinct across phones", () => {
+    expect(authPlaceholderEmail("+255712345678")).toBe(authPlaceholderEmail("+255712345678"));
+    expect(authPlaceholderEmail("+255712345678")).not.toBe(authPlaceholderEmail("+255712345679"));
+  });
+  it("rejects garbage", () => {
+    expect(() => authPlaceholderEmail("abc")).toThrow();
+  });
+});

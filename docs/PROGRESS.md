@@ -186,6 +186,39 @@ PostgreSQL inampa kila mtu (`PUBLIC`) ruhusa ya kuendesha function mpya kwa defa
 - **Jaribio jipya la kudumu (`60_privileges_test`, ukaguzi 9) linashindwa mara moja kama tatizo hili litarudi.** Nimethibitisha kuwa linashindwa (mara 5) bila marekebisho haya.
 - Pia linakagua kuwa kila jedwali lina RLS, na kwamba watumiaji hawana INSERT/UPDATE/DELETE moja kwa moja.
 
+## 🌐 Supabase staging (`diroma-staging`, Frankfurt): 6 Novemba 2026
+Imesanidiwa kupitia Supabase Management API kwa token ya muda iliyowekwa na Mmiliki kwenye fomu salama:
+- **Migrations zote 13 zimeingia** kwenye PostgreSQL 17 halisi bila kosa.
+- **Ukaguzi wa ruhusa kwenye DB halisi:**
+  - Majedwali 72, yote yana RLS.
+  - Function 0 zinazoweza kuitwa na `anon` (isipokuwa `public_catalogue`).
+  - Ruhusa 0 za INSERT/UPDATE/DELETE moja kwa moja.
+  - Helper 1 tu ya RLS (`_has_commission_line`), kwa makusudi.
+- **Auth:**
+  - Usajili wa umma umezimwa.
+  - Kuingia kwa simu kumewashwa, na email login imezimwa.
+  - Nenosiri lazima liwe angalau herufi 12, na TOTP MFA imewashwa.
+- **Bucket ya `reports`** (private, PDF tu) imeundwa.
+- **Majaribio ya Auth halisi** (kwa mtumiaji wa muda, aliyefutwa baadaye):
+
+| Jaribio | Matokeo |
+|---|---|
+| Kuunda mtumiaji kwa simu bila SMS | PASS |
+| Usajili wa umma unakataliwa | PASS |
+| Simu + nenosiri | PASS |
+| Nenosiri baya linakataliwa | PASS |
+| Session inaanza `aal1` | PASS |
+| Asiye na membership haoni data | PASS |
+| Kuandika moja kwa moja kwenye jedwali kunakataliwa | PASS |
+| Email login inakataliwa | PASS |
+| QR ya MFA inatengenezwa | PASS |
+
+- **Hitilafu halisi iliyogunduliwa na kurekebishwa:**
+  - **Tatizo:** Supabase haiwezi kutengeneza QR ya MFA kwa mtumiaji mwenye simu tu ("Error generating QR Code").
+  - **Suluhisho:** kila mtumiaji sasa anapewa anwani isiyopokea barua, `<namba>@phone.diroma.invalid`, ambayo haiwezi kutumika kuingia kwa sababu email login imezimwa.
+  - Imethibitishwa kwenye Supabase halisi.
+- **Bado:** hosting (Vercel) haijawekwa, kwa hiyo kurasa za app hazijapimwa end-to-end, na code ya usanidi ya Mmiliki haijatolewa (inaisha baada ya saa 24, kwa hiyo itatolewa hosting ikishakuwa tayari).
+
 ## 🧪 Ushahidi wa majaribio
 | Jaribio | Matokeo |
 |---|---|
@@ -205,7 +238,7 @@ PostgreSQL inampa kila mtu (`PUBLIC`) ruhusa ya kuendesha function mpya kwa defa
 | axe-core + CSP (`npm run a11y`): login, activate, setup, catalogue ya umma | **0 makosa, 0 ukiukaji wa CSP** |
 | `npm audit --omit=dev` | **0 vulnerabilities** |
 | Select contract | **95/95 OK** |
-| `npm test`: unit tests (PDF, QR inayosomwa tena, vipindi, contracts, siri, CSV ya MauzoTrack n.k.) | **163/163 PASS** |
+| `npm test`: unit tests (PDF, QR inayosomwa tena, vipindi, contracts, siri, CSV ya MauzoTrack n.k.) | **166/166 PASS** |
 | POS terminal kwenye browser (data za majaribio): hesabu ya kikapu, "Lipa yote", desktop na simu | Imekaguliwa |
 | `tsc --noEmit`, `next build` | PASS |
 

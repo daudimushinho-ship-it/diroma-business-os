@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { normalizePhone } from "@/lib/phone";
+import { authPlaceholderEmail, normalizePhone } from "@/lib/phone";
 import { checkNewPassword, normalizeCode } from "@/lib/password";
 import { LANDING, needsMfa, type Workspace } from "@/lib/roles";
 import type { ErrorKey } from "@/lib/i18n";
@@ -96,12 +96,14 @@ export async function setupOwner(_prev: FormState, fd: FormData): Promise<FormSt
 
   const { data: created, error: createErr } = await admin.auth.admin.createUser({
     phone: phone.e164,
+    email: authPlaceholderEmail(phone.e164), // required by Supabase to build the MFA QR code
+    email_confirm: true,
     password,
     // Phone possession is attested by the out-of-band setup code + installer verification (documented in docs/SETUP.md).
     phone_confirm: true,
     app_metadata: { enrolled_via: "owner_setup_code" },
   });
-  if (createErr || !created.user) return { error: createErr?.code === "phone_exists" ? "duplicate_phone" : "generic" };
+  if (createErr || !created.user) return { error: ["phone_exists", "email_exists"].includes(createErr?.code ?? "") ? "duplicate_phone" : "generic" };
 
   const { error: finErr } = await admin.rpc("setup_finalize_owner", {
     p_code: code, p_user: created.user.id, p_phone: phone.e164, p_name: name,

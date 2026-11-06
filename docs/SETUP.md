@@ -27,6 +27,9 @@ Huhitaji kuandika code. Hatua zinazokuhitaji wewe binafsi ni hizi tu, na hakuna 
   - **Disable public sign-ups** (Authentication → Settings → "Allow new users to sign up" off). Staff accounts are
     created only by the server after an Owner invitation.
   - Minimum password length 12.
+  - **Email provider disabled.** Every auth user is created with a placeholder address `<digits>@phone.diroma.invalid`
+    (`authPlaceholderEmail` in `lib/phone.ts`), because Supabase builds the TOTP QR code from the email and fails for
+    phone-only users. With the email provider off, that address can never be used to sign in or receive mail.
   - SMS provider: **not needed** for Milestone A. Activation/recovery is Owner-supervised in person (see below).
     Configure an SMS provider only after the Owner approves its cost.
 

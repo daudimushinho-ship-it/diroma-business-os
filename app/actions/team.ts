@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireWorkspace } from "@/lib/workspace";
-import { normalizePhone } from "@/lib/phone";
+import { authPlaceholderEmail, normalizePhone } from "@/lib/phone";
 import { generateOneTimeCode, generateUnusablePassword } from "@/lib/password";
 import type { ErrorKey } from "@/lib/i18n";
 
@@ -40,11 +40,13 @@ async function issueActivationCode(membershipId: string): Promise<{ code: string
   if (!userId) {
     const { data, error } = await admin.auth.admin.createUser({
       phone: m.phone_e164,
+      email: authPlaceholderEmail(m.phone_e164), // required by Supabase to build the MFA QR code
+      email_confirm: true,
       password: generateUnusablePassword(),
       phone_confirm: true,
       app_metadata: { enrolled_via: "owner_in_person" },
     });
-    if (error || !data.user) return { error: error?.code === "phone_exists" ? "duplicate_phone" : "generic" };
+    if (error || !data.user) return { error: ["phone_exists", "email_exists"].includes(error?.code ?? "") ? "duplicate_phone" : "generic" };
     userId = data.user.id;
   }
 

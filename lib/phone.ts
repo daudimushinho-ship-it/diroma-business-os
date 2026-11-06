@@ -32,3 +32,15 @@ export function formatPhone(e164: string): string {
   const parsed = parsePhoneNumberFromString(e164);
   return parsed ? parsed.formatInternational() : e164;
 }
+
+/**
+ * Supabase builds the TOTP QR code from the user's email; a phone-only user gets "Error generating QR Code".
+ * Every auth user therefore carries a non-deliverable placeholder address derived from the phone
+ * (RFC 2606 `.invalid` TLD; the email provider is disabled, so it can never be used to sign in or receive mail).
+ * The authenticator app shows it as the account label, e.g. "DIROMA: 255712345678@phone.diroma.invalid".
+ */
+export function authPlaceholderEmail(e164: string): string {
+  const digits = e164.replace(/\D/g, "");
+  if (!/^\d{8,15}$/.test(digits)) throw new Error("invalid_phone");
+  return `${digits}@phone.diroma.invalid`;
+}
