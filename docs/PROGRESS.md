@@ -217,7 +217,11 @@ Imesanidiwa kupitia Supabase Management API kwa token ya muda iliyowekwa na Mmil
   - **Tatizo:** Supabase haiwezi kutengeneza QR ya MFA kwa mtumiaji mwenye simu tu ("Error generating QR Code").
   - **Suluhisho:** kila mtumiaji sasa anapewa anwani isiyopokea barua, `<namba>@phone.diroma.invalid`, ambayo haiwezi kutumika kuingia kwa sababu email login imezimwa.
   - Imethibitishwa kwenye Supabase halisi.
-- **Bado:** hosting (Vercel) haijawekwa, kwa hiyo kurasa za app hazijapimwa end-to-end, na code ya usanidi ya Mmiliki haijatolewa (inaisha baada ya saa 24, kwa hiyo itatolewa hosting ikishakuwa tayari).
+- **Hosting:** Vercel project `diroma-business-os` (https://diroma-business-os.vercel.app). Funguo 4 zimewekwa kupitia API (secret key na CRON_SECRET kama "sensitive"), kwa hiyo Mmiliki hakunakili funguo yoyote kwa mkono.
+- **Usanidi wa Mmiliki: PASS (end-to-end kwenye mfumo halisi, 6 Nov 2026).**
+  - Mtiririko: `/setup` kwa code ya mara moja → akaunti → MFA (TOTP) → Muhtasari wa Biashara.
+  - DB inaonyesha: membership `owner`/`active`, MFA factor 1 imethibitishwa, anwani ya ndani ipo, na audit `owner.bootstrap`.
+- **Bado:** kuwezesha wafanyakazi, kurasa za kazi (POS, Stoo n.k.) na cron hazijapimwa end-to-end; kwa hiyo kurasa za app hazijapimwa end-to-end, na code ya usanidi ya Mmiliki haijatolewa (inaisha baada ya saa 24, kwa hiyo itatolewa hosting ikishakuwa tayari).
 
 ## 🧪 Ushahidi wa majaribio
 | Jaribio | Matokeo |
@@ -322,7 +326,8 @@ Milestones A–G zimekamilika kwa kiwango kinachoweza kupimwa hapa. Kinachofuata
 | POS, idhini, mkopo, makusanyo, marejesho, ukaguzi | Implemented and tested (DB + concurrency) |
 | Akaunti za pesa, kuweka benki, matumizi, posho, kufunga zamu, journal | Implemented and tested (DB + concurrency) |
 | Kurasa za Milestone B–C (UI) | Implemented, unverified end-to-end (POS terminal imekaguliwa kwa data za majaribio) |
-| Login simu+nenosiri, MFA, activation (Supabase Auth) | Needs external configuration |
+| Login simu+nenosiri, MFA (Supabase Auth) | Implemented and tested end-to-end (Owner, staging) |
+| Kuwezesha wafanyakazi (activation) | Implemented; not yet tested end-to-end |
 | SMS recovery | Planned |
 | Wateja wa Jumla / Consignment, statements, ukumbusho | Implemented and tested (DB + concurrency) |
 | Kurasa za Wateja wa Jumla (UI) | Implemented, unverified end-to-end |
