@@ -27,7 +27,10 @@ export const CAPABILITIES: Capability[] = [
   { key: "closing",     sw: "Kufunga zamu na ukaguzi huru wa tofauti", en: "Shift closing with independent variance review", state: "implemented", milestone: "C" },
   { key: "journal",     sw: "Ledger ya double-entry, COGS kwa gharama ya wastani", en: "Double-entry journal, COGS at average cost", state: "implemented", milestone: "C" },
   { key: "salesui",     sw: "Kurasa za POS/Mauzo/Wateja/Fedha/Idhini (end-to-end na Supabase)", en: "POS/Sales/Customers/Money/Approvals screens (end-to-end with Supabase)", state: "unverified", milestone: "C" },
-  { key: "wholesale",   sw: "Wateja wa Jumla na consignment", en: "Wholesale customers and consignment", state: "planned", milestone: "D" },
+  { key: "wholesale",   sw: "Wateja wa Jumla: consignment (tuma, ripoti, rudisha, upotevu), mauzo ya jumla, statements", en: "Wholesale: consignment (dispatch, report, return, loss), outright sales, statements", state: "implemented", milestone: "D" },
+  { key: "reminders",   sw: "Ukumbusho wa taarifa (kiungo cha WhatsApp + kumbukumbu)", en: "Update reminders (WhatsApp link + log)", state: "implemented", milestone: "D" },
+  { key: "wholesaleui", sw: "Kurasa za Wateja wa Jumla (end-to-end na Supabase)", en: "Wholesale screens (end-to-end with Supabase)", state: "unverified", milestone: "D" },
+  { key: "portal",      sw: "Portal ya mbia na ujumbe unaotumwa na mfumo", en: "Partner portal and system-sent messages", state: "planned", milestone: "F" },
   { key: "reports",     sw: "Ripoti kamili, PDF za kila siku, backup", en: "Full reports, daily PDFs, backups", state: "planned", milestone: "E" },
   { key: "team",        sw: "Malengo ya timu, commission", en: "Team targets, commissions", state: "planned", milestone: "F" },
 ];

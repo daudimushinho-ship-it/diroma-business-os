@@ -1,6 +1,6 @@
 # Ubao wa Maendeleo / Progress Board
 
-_Imesasishwa: 6 Novemba 2026. Kipimo: Milestones A–C za "DIROMA Master Prompt"._
+_Imesasishwa: 7 Novemba 2026. Kipimo: Milestones A–D za "DIROMA Master Prompt"._
 
 ## ✅ Imekamilika
 
@@ -86,6 +86,30 @@ _Imesasishwa: 6 Novemba 2026. Kipimo: Milestones A–C za "DIROMA Master Prompt"
   - Faida ghafi, pamoja na onyo vipande vikiuzwa bila gharama inayojulikana.
   - Pesa kwa aina, madeni, salio za wateja, stoki inayouzika, na thamani ya stoki.
 
+### Milestone D: Wateja wa Jumla na Consignment
+- **Paneli yake peke yake** kwenye menyu ("Wateja wa Jumla"). Si filter ya wateja, wala duka lenye jina la "wholesale".
+- **Njia mbili:**
+  - **Mauzo ya jumla ya moja kwa moja** kutoka Stoo au Duka, kwa bei ya jumla. Deni juu ya kikomo au punguzo kubwa vinahitaji idhini ya mtu mwingine.
+  - **Consignment:** mzigo wetu unakaa kwa mbia hadi atoe taarifa.
+- **Mbia (partner):** mteja wa jumla anayewashiwa consignment. Anapata "eneo" lake kwenye stock ledger ileile, pamoja na siku kati ya taarifa.
+- **Mtiririko wa consignment:**
+  1. Meneja anaunda oda kwa bei iliyokubaliwa, na stoki inahifadhiwa (reserve) Stoo.
+  2. Mtunza Stoo anatuma mzigo, akirekodi jina la aliyepokea na ushahidi. Aliyeunda oda hawezi kuituma mwenyewe.
+  3. **Kutuma si mapato wala deni.** Ni mzigo wetu ulioko kwa mbia, na hauhesabiwi kama unaouzika.
+  4. Taarifa ya mbia inagawanywa hivi:
+     - **Ameuza** → invoice kwa bei iliyokubaliwa (mapato + deni + COGS).
+     - **Amerudisha** → bidhaa zinaenda Ukaguzi.
+     - **Zimepotea** → zinasubiri uamuzi wa mtu huru: kumtoza mbia, kufuta kama hasara, au kukataa.
+  5. Kila mstari wa mzigo uliotumwa unahesabika kikamilifu: aliyouza + aliyorudisha + zilizopotea + zinazosubiri + alizonazo = alizotumiwa.
+- **Muhtasari wa wabia wote bila kufungua kila mmoja:** aliyotumiwa, aliyouza, aliyorudisha, zilizopotea, alizonazo (na thamani yake), invoices, alicholipa, deni halisi, salio lake, deni linaloiva, taarifa inayofuata, na mambo yasiyotatuliwa.
+- **Malipo** yanalipa invoice za zamani kwanza. **Marejesho ya bidhaa zilizokwisha kuuzwa** yanapitia idhini huru na ukaguzi.
+- **Statement ya kila mbia** (salio la mwanzo, mabadiliko, salio la mwisho) na **muhtasari wa wabia wote**, vyote vinaweza kuchapishwa au kuhifadhiwa kama PDF kupitia browser.
+- **Ukumbusho:**
+  - Wabia waliofikia muda wa kutoa taarifa wanaonyeshwa.
+  - Kitufe kinafungua WhatsApp na ujumbe ukiwa tayari, kisha unabofya "Nimekumbusha" ili kurekodi.
+  - **Mfumo hautumi ujumbe wenyewe**, na haudai kuwa umefika.
+- **Stoo:** tab mpya "Tuma kwa mbia". **Idhini:** sehemu mpya "Upotevu unaosubiri uamuzi".
+
 ## 🧪 Ushahidi wa majaribio
 | Jaribio | Matokeo |
 |---|---|
@@ -94,8 +118,10 @@ _Imesasishwa: 6 Novemba 2026. Kipimo: Milestones A–C za "DIROMA Master Prompt"
 | `npm run test:db`, Milestone C: POS, idhini, mkopo, makusanyo, marejesho, matumizi, kuweka benki, posho, zamu, journal, muhtasari | **70/70 PASS** |
 | Ushindani B (vikao 2 halisi): kipande cha mwisho kwa transfer, maombi yanayorudiwa | **7/7 PASS** |
 | Ushindani C (vikao 2 halisi): wauzaji 2 wakiuza kipande cha mwisho; kufunga zamu wakati mauzo yanaendelea | **8/8 PASS** |
-| Select contract: kila `.from().select()` ya app dhidi ya schema halisi | **67/67 OK** |
-| `npm test`: unit tests (simu, nenosiri, roles, barcode decode, CSV, RPC contracts) | **103/103 PASS** |
+| `npm run test:db`, Milestone D: consignment, taarifa, upotevu, mauzo ya jumla, statement, usiri | **44/44 PASS** |
+| Ushindani D (vikao 2 halisi): watu 2 wakiripoti kipande cha mwisho kilichopo kwa mbia | **6/6 PASS** |
+| Select contract: kila `.from().select()` ya app dhidi ya schema halisi | **80/80 OK** |
+| `npm test`: unit tests (simu, nenosiri, roles, barcode decode, CSV, RPC contracts) | **115/115 PASS** |
 | POS terminal kwenye browser (data za majaribio): hesabu ya kikapu, "Lipa yote", desktop na simu | Imekaguliwa |
 | `tsc --noEmit`, `next build` | PASS |
 
@@ -114,16 +140,24 @@ _Imesasishwa: 6 Novemba 2026. Kipimo: Milestones A–C za "DIROMA Master Prompt"
 - **Kufunga zamu kunashughulikia mauzo yanayoendelea,** na M-Pesa/benki haziingii kwenye pesa ya droo.
 - **Gharama isiyojulikana haileti faida ya uongo.**
 
+**Mifano ya master prompt §7B/§10/§17 iliyothibitishwa kwenye Milestone D:**
+- **Tuma 10, auze 6, arudishe 2:** zinabaki 2 kwa mbia.
+- **Kutuma consignment hakuleti mauzo wala deni.**
+- **Taarifa ya mbia inapunguza mzigo alionao tu**, haipunguzi tena Stoo.
+- **Kurudia kutuma au kurudia taarifa hakubadilishi kitu.**
+- Mzigo alionao mbia kwenye rekodi za kutuma unalingana na stoki ya eneo lake kwenye ledger.
+
 **Hitilafu halisi zilizogunduliwa na majaribio kisha kurekebishwa:**
 - `count_decide` ilipitisha `bigint` kwa `_move(int)`.
 - Majaribio mabaya ya code yalikuwa yanafutwa pamoja na rollback, hivyo hayakuhesabiwa.
 - Trigger ya kukagua usawa wa journal ilifichwa na RLS (sasa ni `SECURITY DEFINER`).
 - Script ya majaribio haikurudisha exit code ya kosa. Sasa inarudisha.
+- Salio linaloendelea kwenye statement lilikuwa `numeric` badala ya `bigint` (sasa linabadilishwa ipasavyo).
 
 ## ⏳ Inasubiri uthibitisho kwenye Supabase halisi
 Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker images zimezuiwa, na ruhusa ya kujenga Auth ilikataliwa. Kwa hiyo haya hayajapimwa **end-to-end** kupitia skrini:
 1. Kuingia kwa simu + nenosiri (nafasi 4), MFA, kuwezesha mfanyakazi, kubadili nenosiri, rate limiting.
-2. Kurasa za Milestone B–C: Bidhaa, Stoo, Stoki ya Dukani, Manunuzi, POS, Mauzo, Wateja, Fedha, Idhini.
+2. Kurasa za Milestone B–D: Bidhaa, Stoo, Stoki ya Dukani, Manunuzi, POS, Mauzo, Wateja, Fedha, Idhini, Wateja wa Jumla.
    - Mantiki yote iliyo nyuma yake imepimwa kwenye database.
    - Wito wote wa `rpc()` na `select` umethibitishwa kulingana na schema.
    - Kilichobaki ni kubofya skrini kwenye mfumo halisi.
@@ -141,10 +175,11 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 - **Kufungua tena zamu iliyofungwa:** bado haijajengwa. Marekebisho yanafanywa kwa entry mpya, si kwa kufuta.
 - **Uthibitisho wa M-Pesa:** malipo yote yamewekwa alama "manual" (yameingizwa kwa mkono). Kulinganisha na statement ya M-Pesa kutakuja na integrations.
 - **Kodi (TRA/EFD) na mishahara:** hazijajengwa, na hazitabuniwa bila nyaraka rasmi.
+- **Statements:** kwa sasa ni ukurasa unaochapishwa, au unahifadhiwa kama PDF kupitia browser. PDF zinazotengenezwa na server, na kutumwa kila siku, zinakuja Milestone E.
+- **Portal ya mbia** (mbia kujiingia na kuona hesabu zake) na **ujumbe unaotumwa na mfumo** (WhatsApp/SMS API): bado. Vinahitaji provider na idhini ya gharama zake.
 - **Saa za biashara:** Africa/Dar_es_Salaam (UTC+03:00, haina DST). Mipaka ya siku kwenye ripoti inafuata saa hizi.
 
 ## ⏭️ Inayofuata
-- **D:** **Wateja wa Jumla** na consignment.
 - **E–G:** ripoti kamili, PDF za kila siku, backup na restore, timu, usalama, handover.
 
 ## Hali ya moduli (capability matrix)
@@ -159,5 +194,7 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 | Kurasa za Milestone B–C (UI) | Implemented, unverified end-to-end (POS terminal imekaguliwa kwa data za majaribio) |
 | Login simu+nenosiri, MFA, activation (Supabase Auth) | Needs external configuration |
 | SMS recovery | Planned |
-| Wateja wa Jumla / Consignment | Planned (D) |
+| Wateja wa Jumla / Consignment, statements, ukumbusho | Implemented and tested (DB + concurrency) |
+| Kurasa za Wateja wa Jumla (UI) | Implemented, unverified end-to-end |
+| Portal ya mbia, ujumbe wa mfumo | Planned |
 | Ripoti kamili, backups | Planned (E) |

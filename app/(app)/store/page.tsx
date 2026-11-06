@@ -13,6 +13,7 @@ import { Movements } from "@/components/stock/Movements";
 import { PeriodReport } from "@/components/stock/PeriodReport";
 import { Opening } from "@/components/stock/Opening";
 import { Inspection } from "@/components/stock/Inspection";
+import { ConsignmentDispatch } from "@/components/stock/ConsignmentDispatch";
 import { getSalesDict } from "@/lib/lang";
 import { requireWorkspace } from "@/lib/workspace";
 import { can } from "@/lib/roles";
@@ -39,6 +40,7 @@ export default async function StorePage({ searchParams }: { searchParams: Promis
     { key: "counts", label: s.store.counts }, { key: "movements", label: s.store.movements },
     { key: "reports", label: s.store.reports },
     ...(can(ws, "inspection.release") ? [{ key: "inspection", label: x.inspection.title }] : []),
+    { key: "consignment", label: x.wholesale.dispatch },
     ...(can(ws, "stock.opening") ? [{ key: "opening", label: s.store.opening }] : []),
   ];
   const tab = tabs.some((t) => t.key === sp.tab) ? sp.tab! : "overview";
@@ -65,6 +67,7 @@ export default async function StorePage({ searchParams }: { searchParams: Promis
       {tab === "reports" && <PeriodReport locationId={loc.id} s={s} from={sp.from} to={sp.to} base="/store" />}
       {tab === "opening" && <Opening locationId={loc.id} s={s} design={sp.design} back={back} />}
       {tab === "inspection" && <Inspection x={x} back={back} />}
+      {tab === "consignment" && <ConsignmentDispatch ws={ws} x={x} locationId={loc.id} back={back} />}
     </div>
   );
 }
