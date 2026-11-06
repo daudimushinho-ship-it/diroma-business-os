@@ -105,8 +105,17 @@ export async function setMemberStatus(fd: FormData) {
   if (!supabase) return;
   const reason = String(fd.get("reason") ?? "").trim();
   if (!reason) return;
-  await supabase.rpc("team_set_status", {
-    p_membership: String(fd.get("membership") ?? ""), p_status: String(fd.get("status") ?? ""), p_reason: reason,
-  });
+  const id = String(fd.get("membership") ?? "");
+  const status = String(fd.get("status") ?? "");
+  const { error } = await supabase.rpc("team_set_status", { p_membership: id, p_status: status, p_reason: reason });
+  if (!error) {
+    // Defence in depth: the database already denies a non-active membership on every request;
+    // also ban the auth identity so no new sessions/tokens can be issued until reactivated.
+    const { data: m } = await supabase.from("memberships").select("user_id").eq("id", id).maybeSingle();
+    const admin = createAdminClient();
+    if (m?.user_id && admin) {
+      await admin.auth.admin.updateUserById(m.user_id, { ban_duration: status === "active" ? "none" : "876000h" });
+    }
+  }
   revalidatePath("/team");
 }

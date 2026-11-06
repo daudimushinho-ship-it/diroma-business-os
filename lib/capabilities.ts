@@ -38,6 +38,10 @@ export const CAPABILITIES: Capability[] = [
   { key: "targets",     sw: "Malengo: reels 3/siku, 21/wiki, 3×siku za mwezi, posts 100/mwezi; mauzo kwa Owner tu", en: "Targets: 3 reels/day, 21/week, 3×days/month, 100 posts/month; sales targets Owner-only", state: "implemented", milestone: "F" },
   { key: "teamwork",    sw: "Maudhui yenye ushahidi, kazi zenye ushahidi, wateja watarajiwa", en: "Evidence-based content, tasks, inquiry follow-up", state: "implemented", milestone: "F" },
   { key: "commission",  sw: "Commission: hesabu → idhini huru → malipo mara moja", en: "Commissions: calculate → independent approval → pay once", state: "implemented", milestone: "F" },
-  { key: "catalogue",   sw: "Catalogue ya umma + QR + WhatsApp", en: "Public catalogue + QR + WhatsApp", state: "external", milestone: "F" },
+  { key: "pubcatalogue", sw: "Catalogue ya umma + QR + WhatsApp", en: "Public catalogue + QR + WhatsApp", state: "external", milestone: "F" },
   { key: "teamui",      sw: "Kurasa za Utendaji wa timu (end-to-end na Supabase)", en: "Team performance screens (end-to-end with Supabase)", state: "unverified", milestone: "F" },
+  { key: "hardening",   sw: "CSP yenye nonce, security headers, kuzuia Auth kwa aliyesimamishwa", en: "Nonce CSP, security headers, Auth ban on suspension", state: "implemented", milestone: "G" },
+  { key: "migration",   sw: "Kuhamia kutoka MauzoTrack: wateja, madeni ya mwanzo, stoki ya mwanzo", en: "MauzoTrack migration: customers, opening balances, opening stock", state: "implemented", milestone: "G" },
+  { key: "devices",     sw: "Majaribio kwenye vifaa halisi (simu, printer, scanner)", en: "Real device testing (phones, printer, scanner)", state: "external", milestone: "G" },
+  { key: "pentest",     sw: "Jaribio la usalama la mtaalamu huru", en: "Independent penetration test", state: "planned", milestone: "G" },
 ];

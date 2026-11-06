@@ -29,7 +29,9 @@ export default async function SettingsPage() {
   ];
   return (
     <div className="mx-auto max-w-5xl">
-      <PageHeader title={t.nav.settings} subtitle={`${ws.business.name} · ${ws.business.currency} · ${ws.business.timezone}`} />
+      <PageHeader title={t.nav.settings} subtitle={`${ws.business.name} · ${ws.business.currency} · ${ws.business.timezone}`}>
+        <a href="/settings/migration" className="btn btn-ghost">MauzoTrack → DIROMA</a>
+      </PageHeader>
       <div className="mb-6 grid gap-6 lg:grid-cols-2">
         <section className="card p-5 text-sm">
           <h2 className="mb-3 font-semibold">Integrations</h2>

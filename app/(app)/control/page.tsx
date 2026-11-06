@@ -20,7 +20,9 @@ export default async function ControlPage() {
   const fmt = new Intl.DateTimeFormat(lang === "sw" ? "sw-TZ" : "en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: ws.business.timezone });
   return (
     <div className="mx-auto max-w-6xl">
-      <PageHeader title={t.nav.control} subtitle={t.control.audit} />
+      <PageHeader title={t.nav.control} subtitle={t.control.audit}>
+        <a href="/control/audit-export" className="btn btn-ghost">CSV</a>
+      </PageHeader>
       <section className="card mb-6 p-4 text-sm">
         <h2 className="mb-3 font-semibold">{sw ? "Ripoti za kila siku na backup" : "Daily reports and backups"}</h2>
         <div className="mb-3 grid gap-2 sm:grid-cols-4">

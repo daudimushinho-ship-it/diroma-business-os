@@ -1,6 +1,6 @@
 # Ubao wa Maendeleo / Progress Board
 
-_Imesasishwa: 9 Novemba 2026. Kipimo: Milestones A–F za "DIROMA Master Prompt"._
+_Imesasishwa: 9 Novemba 2026. Kipimo: Milestones A–G za "DIROMA Master Prompt"._
 
 ## ✅ Imekamilika
 
@@ -164,6 +164,22 @@ _Imesasishwa: 9 Novemba 2026. Kipimo: Milestones A–F za "DIROMA Master Prompt"
 - **Catalogue ya umma `/c/<slug>`** (hiari): designs zilizochapishwa tu, bei ya "kuanzia" ya rejareja, na saizi "ipo / haipo". Hakuna gharama, bei ya jumla wala idadi kamili ya stoki. Ina kitufe cha "Uliza WhatsApp" na QR code ya kuchapisha.
 - **Integrations (Mipangilio):** inaonyesha kwa uaminifu kipi kimesanidiwa na kipi bado (SMS, WhatsApp API, M-Pesa API, TRA/EFD).
 
+### Milestone G: Usalama, kuhamia kutoka MauzoTrack, ukaguzi na makabidhiano
+- **Usalama wa browser:** kila ukurasa una Content-Security-Policy yenye nonce ya kila ombi (`proxy.ts`), na scripts za nje zimezuiwa. Pia HSTS, COOP, `frame-ancestors 'none'`, na Permissions-Policy (kamera, mic, mahali, malipo vimezimwa).
+- **Mfanyakazi akisimamishwa au kuondolewa:** sasa anazuiwa pia kwenye Supabase Auth (si ruhusa za database tu), kwa hiyo hawezi kuingia tena hata akiwa na nenosiri.
+- **Ramani ya OWASP ASVS** (`docs/SECURITY.md`): kila hitaji na ushahidi wake, au "haijapimwa" pale ambapo halijapimwa.
+- **Kuhamia kutoka MauzoTrack** (`Mipangilio → MauzoTrack → DIROMA`, `docs/MIGRATION.md`):
+  - Kuingiza wateja na madeni yao ya mwanzo: deni linakuwa "salio la kuanzia" (journal Dr 1100 / Cr 3000), si mauzo mapya.
+  - Kuingiza stoki ya mwanzo kwa kila eneo, kama hati moja kwa kila eneo.
+  - Kuna "jaribio" (dry-run) linaloonyesha makosa ya kila mstari kabla ya kuandika chochote. Kurudia import ileile hakuongezi data mara mbili.
+  - Madeni ya mwanzo **hayahesabiwi** kama mauzo kwenye ripoti, malengo wala commission.
+- **Audit log inapakuliwa kama CSV** kutoka Kituo cha Udhibiti.
+- **Ukaguzi wa ufikivu (axe-core) na CSP** kwenye kila ukurasa wa umma na wa kuingia: hakuna kosa la ufikivu, hakuna ukiukaji wa CSP, na kurasa zinafanya kazi (hydrated).
+- **Jaribio la mzigo (pgbench):** wauzaji 8 kwa wakati mmoja kwa sekunde 20.
+- **Jaribio la siri:** hakuna ufunguo wa siri (service role, CRON_SECRET) unaoweza kufika kwenye code ya browser.
+- **CI** (`.github/workflows/ci.yml`): tsc, unit tests, npm audit, majaribio ya database na build. Bado haijaendeshwa, kwa sababu push imezuiwa.
+- **Nyaraka za makabidhiano:** `HANDOVER.md`, `ACCEPTANCE.md`, `DEPLOY.md`, `MIGRATION.md`, `SECURITY.md`, na miongozo ya nafasi 4 ndani ya `docs/guides/`.
+
 ### 🔐 Marekebisho ya usalama yaliyogunduliwa kwenye Milestone F
 PostgreSQL inampa kila mtu (`PUBLIC`) ruhusa ya kuendesha function mpya kwa default. Functions za Milestones C–F, zikiwemo za ndani kama `_post_journal` na `_move`, na za server pekee kama `daily_snapshot`, zingeweza kuitwa na mtumiaji yeyote, hata asiyeingia.
 - **Imerekebishwa:** migration mpya inafunga kila kitu, kisha inatoa ruhusa kwa majina tu.
@@ -184,8 +200,12 @@ PostgreSQL inampa kila mtu (`PUBLIC`) ruhusa ya kuendesha function mpya kwa defa
 | Backup → restore → verify kwenye PostgreSQL halisi: kila idadi/jumla/checksum, RLS bado inafanya kazi, ufunguo usio sahihi unakataliwa, faili lililobadilishwa linagunduliwa | **11/11 PASS** |
 | `npm run test:db`, Milestone F: malengo ya msingi, ushahidi, uthibitisho huru, kazi, attribution, commission na ledger, catalogue ya umma | **53/53 PASS** |
 | `npm run test:db`, ruhusa: hakuna function/jedwali lililo wazi kwa asiyestahili; kila jedwali lina RLS | **9/9 PASS** |
-| Select contract | **92/92 OK** |
-| `npm test`: unit tests (PDF, QR inayosomwa tena, vipindi, contracts n.k.) | **156/156 PASS** |
+| `npm run test:db`, Milestone G: import ya wateja na stoki, dry-run, kurudia, madeni ya mwanzo hayaingii kwenye mauzo/commission, ruhusa | **21/21 PASS** |
+| Jaribio la mzigo (`LOAD_TEST=1`): wauzaji 8 × sekunde 20 | **8,369 mauzo, 0 yaliyoshindwa, ~19 ms kwa wastani, ~418 kwa sekunde; ledger 3/3 sawa** |
+| axe-core + CSP (`npm run a11y`): login, activate, setup, catalogue ya umma | **0 makosa, 0 ukiukaji wa CSP** |
+| `npm audit --omit=dev` | **0 vulnerabilities** |
+| Select contract | **95/95 OK** |
+| `npm test`: unit tests (PDF, QR inayosomwa tena, vipindi, contracts, siri, CSV ya MauzoTrack n.k.) | **163/163 PASS** |
 | POS terminal kwenye browser (data za majaribio): hesabu ya kikapu, "Lipa yote", desktop na simu | Imekaguliwa |
 | `tsc --noEmit`, `next build` | PASS |
 
@@ -256,7 +276,10 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 - **Saa za biashara:** Africa/Dar_es_Salaam (UTC+03:00, haina DST). Mipaka ya siku kwenye ripoti inafuata saa hizi.
 
 ## ⏭️ Inayofuata
-- **G:** usalama (OWASP ASVS map), kujaribu kuhamisha data kutoka MauzoTrack, majaribio kwenye vifaa halisi, na handover.
+Milestones A–G zimekamilika kwa kiwango kinachoweza kupimwa hapa. Kinachofuata kinamhitaji Mmiliki:
+1. Kuunganisha GitHub upya ili code ipush.
+2. Kufungua Supabase + hosting (`docs/SETUP.md`, `docs/DEPLOY.md`), kisha kupitia `docs/ACCEPTANCE.md` kwenye mfumo halisi na vifaa halisi vya dukani.
+3. Jaribio la usalama la mtaalamu huru kabla ya kuanza kutumia kweli.
 
 ## Hali ya moduli (capability matrix)
 | Uwezo | Hali |
@@ -280,3 +303,7 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 | PDF ya kila siku (cron + storage) | Implemented; needs external configuration (CRON_SECRET, bucket, hosting) |
 | Backup iliyosimbwa + restore inayothibitishwa | Implemented and tested (local PostgreSQL) |
 | Backup za Supabase Pro / PITR / nakala ya storage | Needs external configuration + cost approval |
+| CSP, security headers, kuzuia Auth kwa aliyesimamishwa | Implemented and tested (browser + unit); Auth ban needs Supabase |
+| Kuhamia kutoka MauzoTrack (wateja, madeni, stoki ya mwanzo) | Implemented and tested (DB + unit); UI unverified end-to-end |
+| Ufikivu (axe) | Tested on public/auth pages; app pages need Supabase |
+| Vifaa halisi (simu, printer, scanner) | Not tested |
