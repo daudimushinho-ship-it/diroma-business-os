@@ -177,7 +177,7 @@ _Imesasishwa: 9 Novemba 2026. Kipimo: Milestones A–G za "DIROMA Master Prompt"
 - **Ukaguzi wa ufikivu (axe-core) na CSP** kwenye kila ukurasa wa umma na wa kuingia: hakuna kosa la ufikivu, hakuna ukiukaji wa CSP, na kurasa zinafanya kazi (hydrated).
 - **Jaribio la mzigo (pgbench):** wauzaji 8 kwa wakati mmoja kwa sekunde 20.
 - **Jaribio la siri:** hakuna ufunguo wa siri (service role, CRON_SECRET) unaoweza kufika kwenye code ya browser.
-- **CI** (`.github/workflows/ci.yml`): tsc, unit tests, npm audit, majaribio ya database na build. Bado haijaendeshwa, kwa sababu push imezuiwa.
+- **CI** (`.github/workflows/ci.yml`): tsc, unit tests, npm audit, majaribio ya database na build. Itaendeshwa na GitHub Actions kwenye kila push.
 - **Nyaraka za makabidhiano:** `HANDOVER.md`, `ACCEPTANCE.md`, `DEPLOY.md`, `MIGRATION.md`, `SECURITY.md`, na miongozo ya nafasi 4 ndani ya `docs/guides/`.
 
 ### 🔐 Marekebisho ya usalama yaliyogunduliwa kwenye Milestone F
@@ -262,7 +262,6 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 **Hatua inayofuata kwa Mmiliki:** fungua project ya bure ya Supabase (`docs/SETUP.md`). Kisha nitapima kila mtiririko kwenye skrini na kuandika hapa Pass/Fail.
 
 ## 🚧 Imezuiliwa
-- **Push kwenda GitHub ilikataliwa (403):** Claude GitHub App haina ruhusa kwenye `diroma-business-os`. Kazi iko kwenye commits za ndani kwenye `claude/vibrant-turing-2hlcsn`.
 - **Logo rasmi ya DIROMA haijatolewa.**
 
 ## 📝 Maamuzi ya muda (yameandikwa wazi)
@@ -277,9 +276,8 @@ Mazingira ya ujenzi hayawezi kuendesha Supabase Auth wala PostgREST: Docker imag
 
 ## ⏭️ Inayofuata
 Milestones A–G zimekamilika kwa kiwango kinachoweza kupimwa hapa. Kinachofuata kinamhitaji Mmiliki:
-1. Kuunganisha GitHub upya ili code ipush.
-2. Kufungua Supabase + hosting (`docs/SETUP.md`, `docs/DEPLOY.md`), kisha kupitia `docs/ACCEPTANCE.md` kwenye mfumo halisi na vifaa halisi vya dukani.
-3. Jaribio la usalama la mtaalamu huru kabla ya kuanza kutumia kweli.
+1. Kufungua Supabase + hosting (`docs/SETUP.md`, `docs/DEPLOY.md`), kisha kupitia `docs/ACCEPTANCE.md` kwenye mfumo halisi na vifaa halisi vya dukani.
+2. Jaribio la usalama la mtaalamu huru kabla ya kuanza kutumia kweli.
 
 ## Hali ya moduli (capability matrix)
 | Uwezo | Hali |

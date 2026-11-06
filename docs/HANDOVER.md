@@ -43,7 +43,7 @@ Bei halisi chukua kwenye kurasa za bei za kila mtoa huduma kabla ya kuidhinisha.
 
 **8. Nani anamiliki source code, data na akaunti?**
 DIROMA, yaani wewe. Repo ya GitHub, Supabase, Vercel na domain ziwe chini ya akaunti zako. Watengenezaji wanapewa ruhusa unayoweza kuiondoa wakati wowote.
-**Kwa sasa:** code iko kwenye branch `claude/vibrant-turing-2hlcsn`, ndani ya repo `daudimushinho-ship-it/diroma-business-os`. Push imezuiwa (403) hadi GitHub iunganishwe upya.
+**Kwa sasa:** code iko kwenye branch `claude/vibrant-turing-2hlcsn`, ndani ya repo `daudimushinho-ship-it/diroma-business-os`. Code yote iko GitHub (6 Novemba 2026).
 
 **9. Nini bado hakijakamilika au hakijathibitishwa?**
 - **Kuingia, MFA na kuwezesha wafanyakazi** kupitia Supabase Auth halisi: hakijapimwa.
